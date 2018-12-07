@@ -1,0 +1,25 @@
+{
+  "name": "oktasignin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ws",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crdschurch/crds-static.git"
+  },
+  "author": "Dillon Courts",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crdschurch/crds-static/issues"
+  },
+  "homepage": "https://github.com/crdschurch/crds-static#readme",
+  "dependencies": {
+    "@okta/okta-auth-js": "2.2.0",
+    "@okta/okta-signin-widget": "2.14.0",
+    "local-web-server": "2.6.0"
+  }
+}
