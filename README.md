@@ -4,4 +4,4 @@ Sign in page for Crossroads
 npm i
 npm start
 
-Access on http://localhost:8000
+Access on http://localhost:8000/index.html

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ws",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel *.html -p 8000",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build *.html"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,12 @@
   "homepage": "https://github.com/crdschurch/crds-static#readme",
   "dependencies": {
     "@okta/okta-auth-js": "2.2.0",
-    "@okta/okta-signin-widget": "2.14.0",
-    "local-web-server": "2.6.0"
+    "@okta/okta-signin-widget": "^2.14.0",
+    "local-web-server": "2.6.0",
+    "require": "^2.4.20",
+    "utils.js": "^1.0.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.10.3"
   }
 }

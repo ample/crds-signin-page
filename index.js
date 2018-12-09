@@ -1,3 +1,5 @@
+var OktaAuth = require("@okta/okta-auth-js");
+
 var oktaAuthJsConfig = {
     url: 'https://crossroads.oktapreview.com',
     issuer: 'https://crossroads.oktapreview.com/oauth2/default',
@@ -73,6 +75,7 @@ function toggleLoginButton(loggedIn){
     }
     else{
         loginButton.style.display = 'block';
+        loginButton.onclick = loginButtonClicked;
     }
 } 
 

@@ -1,3 +1,7 @@
+import {setCookie, deleteCookie, getCookie} from './utils.js'
+
+var OktaSignIn = require("@okta/okta-signin-widget");
+
 var oktaSignInConfig = getOktaConfig();
 var oktaSignInWidget = new OktaSignIn(oktaSignInConfig);
 
@@ -21,7 +25,6 @@ function getOktaConfig(){
                     //callRecovery: true,               // Enable voice call-based account recovery
                     //router: true,                       // Leave this set to true for the API demo
                 },
-                authScheme: 'SESSION',
                 baseUrl: 'https://crossroads.oktapreview.com',
                 clientId: '0oahgpg7elMxVJedi0h7',
                 redirectUri: 'http://localhost:8000/signin.html',
