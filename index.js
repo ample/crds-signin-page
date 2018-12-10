@@ -8,7 +8,8 @@ var oktaAuthJsConfig = {
     authParams: {
         issuer: 'default',
         responseType: ['id_token','token'],
-        display: 'page'
+        display: 'page',
+        scopes: ['openid', 'profile', 'email']
     },
     // tokenManager: {
     //     storage: 'cookie'

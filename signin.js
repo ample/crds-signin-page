@@ -30,8 +30,9 @@ function getOktaConfig(){
                 redirectUri: 'http://localhost:8000/signin.html',
                 authParams: {
                     issuer: 'default',
-                    responseType: ['id_token','token'],
-                    display: 'page'
+                    responseType: ['id_token', 'token'],
+                    display: 'page',
+                    scopes: ['openid', 'profile', 'email']
                 },
                 idps: [
                     {type: 'FACEBOOK', id: '0oai46jjrzZEabvTR0h7'},
@@ -45,6 +46,12 @@ function setTokensFromUrl(){
     oktaSignInWidget.token.parseTokensFromUrl(
         function success(res) {
             addTokensToManager(res);
+            // check access token for mpContactId
+            // If no mpContactId
+            // Then assume this is a brand new account
+            // Send request to crossroads backend to create an mp account
+            // wait for this to happen - spinny UI
+            // 
             redirectToOriginUrl();
         },
         function error(err) {
