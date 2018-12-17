@@ -1,4 +1,4 @@
-import {setCookie, deleteCookie, getCookie} from './utils.js'
+import {setCookie, deleteCookie, getCookie, getUrlParam} from './utils.js'
 
 var OktaSignIn = require("@okta/okta-signin-widget");
 
@@ -7,11 +7,10 @@ var oktaSignInWidget = new OktaSignIn(oktaSignInConfig);
 
 //Handle redirect back to this page:
 if (oktaSignInWidget.token.hasTokensInUrl()) {
-    setTokensFromUrl();
+    setTokensFromUrlAndRedirect();
 }
 else {
-    setRedirectUrl();
-    showSignInWidget();
+    checkForAndHandleSession();
 }
 
 function getOktaConfig(){
@@ -41,7 +40,7 @@ function getOktaConfig(){
             }
 }
 
-function setTokensFromUrl(){
+function setTokensFromUrlAndRedirect() {
     console.log("Tokens found in url");
     oktaSignInWidget.token.parseTokensFromUrl(
         function success(res) {
@@ -60,15 +59,46 @@ function setTokensFromUrl(){
     );
 }
 
+function checkForAndHandleSession() {
+    oktaSignInWidget.session.get(function (res) {
+        if (res.status === 'ACTIVE') {
+            handleActiveSession();
+        }
+        // No session, or error retrieving the session. Render the Sign-In Widget.
+        else if (res.status === 'INACTIVE') {
+            setRedirectUrl();
+            showSignInWidget();
+        }
+    });
+}
+
+function handleActiveSession() {
+    if (isAccountActivation()) {
+        // TODO: Create their MP Account
+        // When that's done
+        redirectToOriginUrl();
+    }
+    else {
+        //Just redirect them
+        redirectToOriginUrl();
+    }
+}
+
+function isAccountActivation() {
+    var type = getUrlParam('type_hint');
+    return type === 'ACTIVATION';
+}
+
 function setRedirectUrl() {
-    var urlParams = new URLSearchParams(window.location.search);
-    
-    var redirect_url = urlParams.get('redirect_url');
-    setCookie("redirect_url", redirect_url, 1);
+    var redirect_url = getUrlParam('redirect_url');
+    if (redirect_url) {
+        setCookie('redirect_url', redirect_url, 1);
+    }
+
     window.history.replaceState(null, null, window.location.pathname);
 }
 
-function showSignInWidget(){
+function showSignInWidget() {
     console.log("No tokens in url, showing sign in screen");
 
     //Render the sign in widget
@@ -85,6 +115,13 @@ function addTokensToManager(res) {
 
 function redirectToOriginUrl() {
     var redirect_url = getCookie("redirect_url");
-    deleteCookie("redirect_url");
-    window.location.replace(redirect_url);
+    deleteCookie('redirect_url');
+
+    if (redirect_url) {
+        window.location.replace(redirect_url);
+    }
+    else {
+        //Send them to the homepage
+        window.location.replace('https://www.crossroads.net');
+    }
 }
