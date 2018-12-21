@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel *.html -p 8000",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "TEST_ENV_VAR=test_value parcel index.html -p 8000",
+    "test": "jasmine JASMINE_CONFIG_PATH=jasmine.json",
     "build": "parcel build *.html"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "utils.js": "^1.0.1"
   },
   "devDependencies": {
+    "jasmine": "^3.3.1",
     "parcel-bundler": "^1.10.3"
   }
 }

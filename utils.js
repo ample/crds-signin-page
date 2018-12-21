@@ -27,6 +27,5 @@ export function deleteCookie(cname) {
 
 export function getUrlParam(param) {
   var urlParams = new URLSearchParams(window.location.search);
-    
   return urlParams.get(param);
 }
