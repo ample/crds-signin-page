@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "TEST_ENV_VAR=test_value parcel index.html -p 8000",
+    "start": "parcel index.html -p 8000",
     "test": "JASMINE_CONFIG_PATH=./jasmine.json jasmine",
     "build": "parcel build *.html"
   },

@@ -1,4 +1,5 @@
-import {setCookie, deleteCookie, getCookie, getUrlParam} from './utils.js';
+var Utilities = require('./utilities');
+var utils = new Utilities();
 
 var OktaSignIn = require("@okta/okta-signin-widget");
 var oktaSignInConfig = getOktaConfig();
@@ -18,6 +19,12 @@ function init() {
 }
 
 function getOktaConfig(){
+    var oktaBaseUrl = process.env.OKTA_BASE_URL;
+    var oktaClientId = process.env.OKTA_CLIENT_ID;
+    var oktaRedirectUri = process.env.OKTA_REDIRECT_URI;
+    var oktaFacebookId = process.env.OKTA_FACEBOOK_CLIENT_ID;
+    var oktaGoogleId = process.env.OKTA_GOOGLE_CLIENT_ID;
+
     return  {
                 features: {
                     registration: true,                 // Enable self-service registration flow
@@ -28,10 +35,9 @@ function getOktaConfig(){
                     //callRecovery: true,               // Enable voice call-based account recovery
                     //router: true,                       // Leave this set to true for the API demo
                 },
-                baseUrl: 'https://crossroads.oktapreview.com',
-                clientId: '0oahgpg7elMxVJedi0h7',
-                redirectUri: 'http://localhost:8000/signin.html',
-                fromUri: 'http://localhost:8000/signin.html',
+                baseUrl: oktaBaseUrl,
+                clientId: oktaClientId,
+                redirectUri: oktaRedirectUri,
                 authParams: {
                     issuer: 'default',
                     responseType: ['id_token', 'token'],
@@ -39,8 +45,8 @@ function getOktaConfig(){
                     scopes: ['openid', 'profile', 'email']
                 },
                 idps: [
-                    {type: 'FACEBOOK', id: '0oai46jjrzZEabvTR0h7'},
-                    {type: 'GOOGLE', id: '0oai51vvoweCSDtyN0h7'}
+                    {type: 'FACEBOOK', id: oktaFacebookId},
+                    {type: 'GOOGLE', id: oktaGoogleId}
                 ]
             }
 }
@@ -90,14 +96,14 @@ function handleActiveSession() {
 }
 
 function isAccountActivation() {
-    var type = getUrlParam('type_hint');
+    var type = utils.getUrlParam('type_hint');
     return type === 'ACTIVATION';
 }
 
 function setRedirectUrl() {
-    var redirect_url = getUrlParam('redirect_url');
+    var redirect_url = utils.getUrlParam('redirect_url');
     if (redirect_url) {
-        setCookie('redirect_url', redirect_url, 1);
+        utils.setCookie('redirect_url', redirect_url, 1);
     }
 
     window.history.replaceState(null, null, window.location.pathname);
@@ -119,8 +125,8 @@ function addTokensToManager(res) {
 }
 
 function redirectToOriginUrl() {
-    var redirect_url = getCookie("redirect_url");
-    deleteCookie('redirect_url');
+    var redirect_url = utils.getCookie("redirect_url");
+    utils.deleteCookie('redirect_url');
 
     if (redirect_url) {
         window.location.replace(redirect_url);

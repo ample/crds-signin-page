@@ -1,5 +1,11 @@
 var OktaAuth = require("@okta/okta-auth-js");
 
+var oktaBaseUrl = process.env.OKTA_BASE_URL;
+var oktaClientId = process.env.OKTA_CLIENT_ID;
+var oktaRedirectUri = process.env.OKTA_REDIRECT_URI;
+var oktaFacebookId = process.env.OKTA_FACEBOOK_CLIENT_ID;
+var oktaGoogleId = process.env.OKTA_GOOGLE_CLIENT_ID;
+
 var oktaAuthJsConfig = {
     url: 'https://crossroads.oktapreview.com',
     issuer: 'https://crossroads.oktapreview.com/oauth2/default',
