@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "TEST_ENV_VAR=test_value parcel index.html -p 8000",
-    "test": "jasmine JASMINE_CONFIG_PATH=jasmine.json",
+    "test": "JASMINE_CONFIG_PATH=./jasmine.json jasmine",
     "build": "parcel build *.html"
   },
   "repository": {
@@ -22,7 +22,9 @@
     "@okta/okta-auth-js": "2.2.0",
     "@okta/okta-signin-widget": "^2.14.0",
     "local-web-server": "2.6.0",
+    "npm": "^6.5.0",
     "require": "^2.4.20",
+    "start": "^5.1.0",
     "utils.js": "^1.0.1"
   },
   "devDependencies": {
