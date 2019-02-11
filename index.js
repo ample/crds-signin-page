@@ -5,6 +5,8 @@ var OktaSignIn = require("@okta/okta-signin-widget");
 var oktaSignInConfig = getOktaConfig();
 var oktaSignInWidget = new OktaSignIn(oktaSignInConfig);
 
+import "./application.scss";
+
 init();
 
 function init() {
@@ -21,7 +23,7 @@ function getOktaConfig() {
   var oktaClientId = process.env.OKTA_CLIENT_ID;
   var oktaRedirectUri = process.env.OKTA_REDIRECT_URI;
   var oktaFacebookId = process.env.OKTA_FACEBOOK_CLIENT_ID;
-  var oktaGoogleId = process.env.OKTA_GOOGLE_CLIENT_ID;
+  // var oktaGoogleId = process.env.OKTA_GOOGLE_CLIENT_ID;
 
   return {
     features: {
@@ -44,8 +46,15 @@ function getOktaConfig() {
     },
     idps: [
       { type: "FACEBOOK", id: oktaFacebookId },
-      { type: "GOOGLE", id: oktaGoogleId },
+      // { type: "GOOGLE", id: oktaGoogleId },
     ],
+    i18n: {
+      en: {
+        "primaryauth.username.placeholder": "Email",
+        "registration.signup.label": "New to Crossroads?",
+        "registration.signup.text": "Create an account.",
+      },
+    },
   };
 }
 

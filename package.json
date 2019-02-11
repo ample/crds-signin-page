@@ -21,6 +21,7 @@
   "dependencies": {
     "@okta/okta-auth-js": "2.2.0",
     "@okta/okta-signin-widget": "^2.14.0",
+    "crds-shared-header": "^0.7.3",
     "local-web-server": "2.6.0",
     "npm": "^6.5.0",
     "require": "^2.4.20",
@@ -28,7 +29,16 @@
     "utils.js": "^1.0.1"
   },
   "devDependencies": {
+    "crds-styles": "^3.1.2",
     "jasmine": "^3.3.1",
-    "parcel-bundler": "^1.10.3"
+    "parcel-bundler": "^1.10.3",
+    "parcel-plugin-static-files-copy": "^2.0.0",
+    "prettier": "^1.14.2",
+    "sass": "^1.17.0",
+    "scss": "^0.2.4"
+  },
+  "staticFiles": {
+    "staticPath": "public",
+    "watcherGlob": false
   }
 }

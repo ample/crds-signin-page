@@ -1,0 +1,268 @@
+// stylelint-disable declaration-no-important
+
+$bootstrap-sass-asset-helper: false;
+$icon-font-path: './node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+$icon-font-name: 'glyphicons-halflings-regular';
+$cr-path-to-icons-sprite: './node_modules/crds-styles/assets/svgs/';
+
+@import './node_modules/crds-styles/assets/stylesheets/crds-styles';
+
+body,
+html {
+  height: 100%;
+}
+
+.crds-shared-header {
+  min-height: 72px;
+}
+
+.okta-sign-in-container {
+  @extend .font-family-base-light;
+
+  background-color: rgb(88, 85, 85);
+  background-image: url('./public/images/explore-opening-bg.jpg');
+  background-size: 100%;
+
+  @media (min-width: $screen-sm) {
+    height: 100%;
+  }
+
+  .icon {
+    $size: 88px;
+    height: $size;
+    width: $size;
+  }
+
+  ul {
+    padding-left: 10px !important;
+
+    li {
+      list-style: none;
+      display: flex;
+      padding-bottom: 6px;
+
+      &:before {
+        content: '\25CF';
+        font-size: 10px;
+        align-self: center;
+        padding-right: 6px;
+      }
+    }
+  }
+}
+
+.okta-sign-in-content {
+  color: $cr-white;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1em;
+
+  @media (min-width: $screen-sm) {
+    flex-direction: row;
+  }
+
+  @media (min-width: $screen-lg) {
+    padding: 1em 7em !important;
+  }
+
+  > div {
+    &:first-of-type {
+      @media (max-width: $screen-sm) {
+        order: 2;
+        margin-top: 40px !important;
+      }
+
+      @media (min-width: $screen-sm) {
+        padding-right: 5%;
+      }
+
+      @media (min-width: $screen-md) {
+        padding-right: 10%;
+      }
+    }
+  }
+
+  h3 {
+    color: $cr-white;
+  }
+}
+
+.o-form-fieldset {
+  input {
+    @extend .form-control;
+
+    border: 0 !important;
+  }
+}
+
+.list-content {
+  margin-top: 30px;
+}
+
+#okta-sign-in {
+  margin-top: 0 !important;
+  width: 100% !important;
+
+  &.auth-container {
+    .okta-form-input-field {
+      color: $cr-gray-dark !important;
+      background-color: #f4f4f4 !important;
+      font-size: 16px !important;
+    }
+
+    .auth-content {
+      max-width: 100% !important;
+    }
+  }
+
+  .o-form-head {
+    @extend .font-size-h3;
+    @extend .font-family-condensed-extra;
+
+    color: $cr-gray-dark !important;
+    line-height: 36px !important;
+    margin-top: 0 !important;
+    text-align: left !important;
+    text-transform: uppercase !important;
+
+    &::after {
+      @extend .font-family-base-light;
+
+      display: block;
+      content: 'To your Crossroads account';
+      font-size: 16px;
+      text-transform: initial;
+    }
+  }
+
+  .auth-content {
+    padding: 48px 24px !important;
+  }
+
+  .o-form {
+    .o-form-input {
+      border: 0;
+      line-height: 18px !important;
+
+      .input-icon + input {
+        padding-left: 10px !important;
+      }
+    }
+
+    .input-fix {
+      border: none !important;
+    }
+  }
+
+  .auth-footer {
+    font-size: 14px !important;
+  }
+
+  .social-auth-button {
+    @extend .font-family-base-light;
+
+    background: none !important;
+    border-color: $cr-blue !important;
+    border-color: $cr-blue !important;
+    color: $cr-blue !important;
+    font-size: 16px !important;
+    padding-left: 48px !important;
+
+    &.link-button {
+      &:last-of-type {
+        margin-bottom: 20px !important;
+      }
+    }
+  }
+
+  .social-auth-facebook-button {
+    background: url('./public/images/icon-facebook-oauth.svg') no-repeat 10px !important;
+  }
+
+  .social-auth-google-button {
+    background: url('./public/images/icon-google-oauth.svg') no-repeat 10px !important;
+  }
+}
+
+.auth-container {
+  border: 0px !important;
+  border-radius: 0 !important;
+}
+
+.auth-header,
+.input-tooltip.icon,
+.input-icon.icon {
+  display: none;
+}
+
+// #widget-container {
+//   @media (max-width: $screen-sm) {
+//     max-width: 360px !important;
+//   }
+// }
+
+#okta-signin-username,
+#okta-signin-password {
+  font-family: $base-font-face !important;
+  font-weight: 100 !important;
+  font-size: 16px !important;
+}
+
+.custom-checkbox {
+  @extend .font-family-base-light;
+
+  label {
+    font-size: 14px !important;
+  }
+}
+
+.o-form-button-bar {
+  .button-primary {
+    @extend .font-family-base-light;
+    background-color: $cr-blue !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    font-size: 16px !important;
+  }
+}
+
+.auth-divider {
+  color: $cr-gray-light;
+  background-color: $cr-gray-lighter !important;
+
+  .auth-divider-text {
+    top: -0.6em !important;
+  }
+}
+
+.link.help {
+  color: $cr-cyan !important;
+  font-size: 14px !important;
+
+}
+
+.registration-container {
+  margin-top: 15px !important;
+
+  .content-container {
+    border-top-color: $cr-gray-lighter !important;
+    padding-top: 15px !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+
+    .registration-label,
+    .registration-link {
+      font-size: 16px !important;
+    }
+
+    .registration-link {
+      display: block;
+      margin-left: 0 !important;
+
+      @media (min-width: $screen-sm) {
+        display: inline;
+      }
+    }
+  }
+}
