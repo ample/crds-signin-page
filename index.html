@@ -13,9 +13,54 @@
   type="text/css"
   rel="stylesheet"/>
 
-<div id="widget-container"></div>
+<div class="crds-shared-header">
+  <div data-header></div>
+</div>
+
+<div class="okta-sign-in-container">
+  <section class="container">
+    <div class="okta-sign-in-content">
+      <div>
+        <svg class="icon" viewbox="0 0 256 256">
+          <use xlink:href="/public/assets/svgs/icons.svg#screwhead-crds"></use>
+        </svg>
+
+        <h3>Community is waiting</h3>
+        <p>Impedit ab, mollitia, veniam nihil ipsum tempore beatae totam corrupti possimus officia accusamus. Quam, aliquam! Quas porro delectus unde. Labore, dicta omnis.</p>
+
+        <div class="list-content">
+          <p><strong>An account at Crossroads enables you to:</strong></p>
+          <ul>
+            <li>Connect with others by beatae totam corrupti</li>
+            <li>Register for events like Eos deleniti, Ipsa aliquid or Aut impedit id nulla</li>
+            <li>Get involved by serving nulla sed consectetur</li>
+            <li>Give online and track your donations</li>
+          </ul>
+        </div>
+      </div>
+      <div id="widget-container"></div>
+    </div>
+  </section>
+</div>
+
+<script src=https://use.typekit.net/ccb3vpa.js></script>
+
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+
+<script src="https://d1tmclqz61gqwd.cloudfront.net/javascripts/crds-shared-header-v0.7.3.min.js"></script>
 
 <script
     src="index.js"
     type="text/javascript">
+</script>
+
+<script>
+  var options = { el: '[data-header]' };
+  var header = new CRDS.SharedHeader(options);
+      header.render();
 </script>
