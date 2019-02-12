@@ -7,6 +7,12 @@ $cr-path-to-icons-sprite: './node_modules/crds-styles/assets/svgs/';
 
 @import './node_modules/crds-styles/assets/stylesheets/crds-styles';
 
+
+body {
+  background-image: url('https://crds-cms-uploads.imgix.net/Uploads/explore-opening-bg.jpg?auto=format%2Ccompress');
+  background-size: 100%;
+}
+
 body,
 html {
   height: 100%;
@@ -14,18 +20,11 @@ html {
 
 .crds-shared-header {
   min-height: 72px;
+  background-color: $cr-white;
 }
 
 .okta-sign-in-container {
   @extend .font-family-base-light;
-
-  background-color: rgb(88, 85, 85);
-  background-image: url('./public/images/explore-opening-bg.jpg');
-  background-size: 100%;
-
-  @media (min-width: $screen-sm) {
-    height: 100%;
-  }
 
   .icon {
     $size: 88px;
@@ -176,11 +175,11 @@ html {
   }
 
   .social-auth-facebook-button {
-    background: url('./public/images/icon-facebook-oauth.svg') no-repeat 10px !important;
+    background: url('./public/assets/svgs/icon-facebook-oauth.svg') no-repeat 10px !important;
   }
 
   .social-auth-google-button {
-    background: url('./public/images/icon-google-oauth.svg') no-repeat 10px !important;
+    background: url('./public/assets/svgs/icon-google-oauth.svg') no-repeat 10px !important;
   }
 }
 
