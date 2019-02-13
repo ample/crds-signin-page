@@ -154,6 +154,7 @@ html {
   }
 
   .auth-footer {
+    @extend .font-family-base-light;
     font-size: 14px !important;
   }
 
@@ -193,12 +194,6 @@ html {
 .input-icon.icon {
   display: none;
 }
-
-// #widget-container {
-//   @media (max-width: $screen-sm) {
-//     max-width: 360px !important;
-//   }
-// }
 
 #okta-signin-username,
 #okta-signin-password {
@@ -245,6 +240,8 @@ html {
   margin-top: 15px !important;
 
   .content-container {
+    @extend .font-family-base-light;
+
     border-top-color: $cr-gray-lighter !important;
     padding-top: 15px !important;
     padding-bottom: 0 !important;
