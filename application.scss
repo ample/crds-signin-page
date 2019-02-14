@@ -24,7 +24,7 @@ html {
 }
 
 .okta-sign-in-container {
-  @extend .font-family-base-light;
+  @extend .font-family-base;
 
   .icon {
     $size: 88px;
@@ -125,7 +125,7 @@ html {
     text-transform: uppercase !important;
 
     &::after {
-      @extend .font-family-base-light;
+      @extend .font-family-base;
 
       display: block;
       content: 'To your Crossroads account';
@@ -145,20 +145,33 @@ html {
 
       .input-icon + input {
         padding-left: 10px !important;
+
+        &::placeholder {
+          @extend .font-family-base;
+
+          font-size: 16px;
+        }
       }
     }
 
     .input-fix {
       border: none !important;
+      height: 42px !important;
+    }
+
+    .okta-form-input-error,
+    .okta-form-infobox-error {
+      @extend .font-family-base;
     }
   }
 
   .auth-footer {
+    @extend .font-family-base;
     font-size: 14px !important;
   }
 
   .social-auth-button {
-    @extend .font-family-base-light;
+    @extend .font-family-base;
 
     background: none !important;
     border-color: $cr-blue !important;
@@ -194,21 +207,15 @@ html {
   display: none;
 }
 
-// #widget-container {
-//   @media (max-width: $screen-sm) {
-//     max-width: 360px !important;
-//   }
-// }
-
 #okta-signin-username,
 #okta-signin-password {
   font-family: $base-font-face !important;
-  font-weight: 100 !important;
   font-size: 16px !important;
+  font-weight: 100 !important;
 }
 
 .custom-checkbox {
-  @extend .font-family-base-light;
+  @extend .font-family-base;
 
   label {
     font-size: 14px !important;
@@ -217,7 +224,7 @@ html {
 
 .o-form-button-bar {
   .button-primary {
-    @extend .font-family-base-light;
+    @extend .font-family-base;
     background-color: $cr-blue !important;
     background-image: none !important;
     border: 0 !important;
@@ -245,6 +252,8 @@ html {
   margin-top: 15px !important;
 
   .content-container {
+    @extend .font-family-base;
+
     border-top-color: $cr-gray-lighter !important;
     padding-top: 15px !important;
     padding-bottom: 0 !important;
