@@ -46,11 +46,17 @@
 <script src="index.js" type="text/javascript"></script>
 
 <script>
-  var options = { el: '[data-header]' };
+  var options = {
+    el: '[data-header]',
+    appEndpoint: process.env.CRDS_APP_ENDPOINT,
+    cmsEndpoint: process.env.CRDS_CMS_ENDPOINT,
+    imgEndpoint: process.env.CRDS_GATEWAY_ENDPOINT,
+    crdsCookiePrefix: process.env.CRDS_COOKIE_PREFIX
+  };
   var header = new CRDS.SharedHeader(options);
       header.render();
 
   $('[data-header]').on('show.bs.dropdown', function () {
     CRDS.CurrentSeries.process();
-  })      
+  });
 </script>
