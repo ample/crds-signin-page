@@ -146,7 +146,9 @@ html {
       .input-icon + input {
         padding-left: 10px !important;
 
-        &::placeholder {
+        &::placeholder,
+        &[type="text"],
+        &[type="password"] {
           @extend .font-family-base;
 
           font-size: 16px;
