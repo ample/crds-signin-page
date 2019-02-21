@@ -165,6 +165,26 @@ html {
     .okta-form-infobox-error {
       @extend .font-family-base;
     }
+
+    .okta-form-infobox-error {
+      @extend .alert;
+      @extend .alert-danger;
+      padding-left: 1rem !important;
+
+      &::before,
+      .icon {
+        display: none;
+      }
+    }
+
+    .okta-form-input-error {
+      color: $alert-danger;
+    }
+
+    .o-form-input,
+    .o-form-explain {
+      padding-top: 6px;
+    }
   }
 
   .auth-footer {
