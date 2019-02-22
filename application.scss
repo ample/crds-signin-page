@@ -140,7 +140,7 @@ html {
       border: 0;
       line-height: 18px !important;
 
-      .input-icon + input {
+      input {
         padding-left: 10px !important;
 
         &::placeholder,
@@ -225,6 +225,11 @@ html {
 .input-tooltip.icon,
 .input-icon.icon {
   display: none;
+}
+
+.subschema,
+.required-fields-label {
+  @extend .font-family-base;
 }
 
 #okta-signin-username,
