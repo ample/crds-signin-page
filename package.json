@@ -6,7 +6,8 @@
   "scripts": {
     "start": "parcel index.html -p 8000",
     "test": "JASMINE_CONFIG_PATH=./jasmine.json jasmine",
-    "build": "parcel build *.html"
+    "build": "parcel build *.html",
+    "lint.stylesheets": "./node_modules/.bin/stylelint --config stylelint.config.js '**/*.scss' --fix"
   },
   "repository": {
     "type": "git",
@@ -33,9 +34,27 @@
     "jasmine": "^3.3.1",
     "parcel-bundler": "^1.10.3",
     "parcel-plugin-static-files-copy": "^2.0.0",
-    "prettier": "^1.14.2",
+    "prettier": "^1.16.4",
+    "prettier-stylelint": "^0.4.2",
     "sass": "^1.17.0",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "stylelint": "^9.10.1",
+    "stylelint-a11y": "^1.1.10",
+    "stylelint-at-rule-no-children": "^0.3.1",
+    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-declaration-block-no-ignored-properties": "^1.1.0",
+    "stylelint-declaration-strict-value": "^1.1.2",
+    "stylelint-formatter-pretty": "^1.0.3",
+    "stylelint-high-performance-animation": "^1.1.1",
+    "stylelint-images": "^2.0.0",
+    "stylelint-no-indistinguishable-colors": "^1.2.1",
+    "stylelint-no-unsupported-browser-features": "^3.0.2",
+    "stylelint-order": "^2.0.0",
+    "stylelint-processor-ignore-front-matter": "^1.0.0",
+    "stylelint-scss": "^3.5.3",
+    "stylelint-suitcss": "^3.0.0",
+    "stylelint-z-index-value-constraint": "^1.0.0"
   },
   "staticFiles": {
     "staticPath": "public",
