@@ -242,16 +242,14 @@ html {
   }
 }
 
-.o-form-button-bar {
-  .button-primary {
-    @extend .font-family-base;
+.button-primary {
+  @extend .font-family-base;
 
-    background-color: $cr-blue !important;
-    background-image: none !important;
-    border: 0 !important;
-    border-radius: 4px !important;
-    font-size: 16px !important;
-  }
+  background-color: $cr-blue !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  font-size: 16px !important;
 }
 
 .auth-divider {
