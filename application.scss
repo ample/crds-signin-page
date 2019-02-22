@@ -58,10 +58,12 @@ html {
 
   @media (min-width: $screen-sm) {
     flex-direction: row;
+    padding-top: 2.8rem;
   }
 
   @media (min-width: $screen-lg) {
-    padding: 1em 7em !important;
+    padding-left: 7em !important;
+    padding-right: 7em !important;
   }
 
   > div {
@@ -73,6 +75,7 @@ html {
 
       @media (min-width: $screen-sm) {
         padding-right: 5%;
+        padding-top: 2.8rem;
       }
 
       @media (min-width: $screen-md) {
