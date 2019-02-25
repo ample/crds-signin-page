@@ -115,6 +115,15 @@ html {
     .auth-content {
       max-width: 100% !important;
       padding: 48px 24px !important;
+
+      .help-links {
+        margin-top: 4px;
+
+        li {
+          margin-top: 0 !important;
+          padding-bottom: 2px;
+        }
+      }
     }
   }
 
@@ -135,20 +144,6 @@ html {
       display: block;
       font-size: 16px;
       text-transform: initial;
-    }
-  }
-
-  .o-form-content {
-    @extend .font-family-base;
-
-    span {
-      display: inline-block;
-      font-size: 16px;
-      padding-bottom: 12px;
-    }
-
-    h2 {
-      @extend .font-size-h6;
     }
   }
 
@@ -311,6 +306,22 @@ html {
       @media (min-width: $screen-sm) {
         display: inline;
       }
+    }
+  }
+}
+
+.registration-complete {
+  .o-form-content {
+    @extend .font-family-base;
+
+    span {
+      display: inline-block;
+      font-size: 16px;
+      padding-bottom: 12px;
+    }
+
+    h2 {
+      @extend .font-size-h6;
     }
   }
 }
