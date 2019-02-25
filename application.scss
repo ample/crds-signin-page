@@ -7,10 +7,8 @@ $cr-path-to-icons-sprite: './node_modules/crds-styles/assets/svgs/';
 
 @import './node_modules/crds-styles/assets/stylesheets/crds-styles';
 
-
 body {
-  background-image: url('https://crds-cms-uploads.imgix.net/Uploads/explore-opening-bg.jpg?auto=format%2Ccompress');
-  background-size: 100%;
+  background-color: $cr-gray-lighter !important;
 }
 
 body,
@@ -25,6 +23,9 @@ html {
 
 .okta-sign-in-container {
   @extend .font-family-base;
+
+  background-image: url('https://crds-cms-uploads.imgix.net/Uploads/explore-opening-bg.jpg?auto=format%2Ccompress');
+  background-size: 100%;
 
   .icon {
     $size: 88px;
