@@ -1,4 +1,4 @@
-// stylelint-disable declaration-no-important
+// stylelint-disable declaration-no-important, a11y/font-size-is-readable, a11y/no-display-none, max-nesting-depth
 
 $bootstrap-sass-asset-helper: false;
 $icon-font-path: './node_modules/bootstrap-sass/assets/fonts/bootstrap/';
@@ -6,7 +6,6 @@ $icon-font-name: 'glyphicons-halflings-regular';
 $cr-path-to-icons-sprite: './node_modules/crds-styles/assets/svgs/';
 
 @import './node_modules/crds-styles/assets/stylesheets/crds-styles';
-
 
 body {
   background-image: url('https://crds-cms-uploads.imgix.net/Uploads/explore-opening-bg.jpg?auto=format%2Ccompress');
@@ -19,8 +18,8 @@ html {
 }
 
 .crds-shared-header {
-  min-height: 72px;
   background-color: $cr-white;
+  min-height: 72px;
 }
 
 .okta-sign-in-container {
@@ -28,6 +27,7 @@ html {
 
   .icon {
     $size: 88px;
+
     height: $size;
     width: $size;
   }
@@ -36,14 +36,14 @@ html {
     padding-left: 10px !important;
 
     li {
-      list-style: none;
       display: flex;
+      list-style: none;
       padding-bottom: 6px;
 
-      &:before {
+      &::before {
+        align-self: center;
         content: '\25CF';
         font-size: 10px;
-        align-self: center;
         padding-right: 6px;
       }
     }
@@ -58,21 +58,24 @@ html {
 
   @media (min-width: $screen-sm) {
     flex-direction: row;
+    padding-top: 2.8rem;
   }
 
   @media (min-width: $screen-lg) {
-    padding: 1em 7em !important;
+    padding-left: 7em !important;
+    padding-right: 7em !important;
   }
 
   > div {
     &:first-of-type {
       @media (max-width: $screen-sm) {
-        order: 2;
         margin-top: 40px !important;
+        order: 2;
       }
 
       @media (min-width: $screen-sm) {
         padding-right: 5%;
+        padding-top: 2.8rem;
       }
 
       @media (min-width: $screen-md) {
@@ -104,13 +107,23 @@ html {
 
   &.auth-container {
     .okta-form-input-field {
-      color: $cr-gray-dark !important;
       background-color: #f4f4f4 !important;
+      color: $cr-gray-dark !important;
       font-size: 16px !important;
     }
 
     .auth-content {
       max-width: 100% !important;
+      padding: 48px 24px !important;
+
+      .help-links {
+        margin-top: 4px;
+
+        li {
+          margin-top: 0 !important;
+          padding-bottom: 2px;
+        }
+      }
     }
   }
 
@@ -127,15 +140,11 @@ html {
     &::after {
       @extend .font-family-base;
 
-      display: block;
       content: 'To your Crossroads account';
+      display: block;
       font-size: 16px;
       text-transform: initial;
     }
-  }
-
-  .auth-content {
-    padding: 48px 24px !important;
   }
 
   .o-form {
@@ -143,12 +152,12 @@ html {
       border: 0;
       line-height: 18px !important;
 
-      .input-icon + input {
+      input {
         padding-left: 10px !important;
 
         &::placeholder,
-        &[type="text"],
-        &[type="password"] {
+        &[type='text'],
+        &[type='password'] {
           @extend .font-family-base;
 
           font-size: 16px;
@@ -165,10 +174,32 @@ html {
     .okta-form-infobox-error {
       @extend .font-family-base;
     }
+
+    .okta-form-infobox-error {
+      @extend .alert;
+      @extend .alert-danger;
+
+      padding-left: 1rem !important;
+
+      &::before,
+      .icon {
+        display: none;
+      }
+    }
+
+    .okta-form-input-error {
+      color: $alert-danger;
+    }
+
+    .o-form-input,
+    .o-form-explain {
+      padding-top: 6px;
+    }
   }
 
   .auth-footer {
     @extend .font-family-base;
+
     font-size: 14px !important;
   }
 
@@ -176,7 +207,6 @@ html {
     @extend .font-family-base;
 
     background: none !important;
-    border-color: $cr-blue !important;
     border-color: $cr-blue !important;
     color: $cr-blue !important;
     font-size: 16px !important;
@@ -199,7 +229,7 @@ html {
 }
 
 .auth-container {
-  border: 0px !important;
+  border: 0 !important;
   border-radius: 0 !important;
 }
 
@@ -207,6 +237,11 @@ html {
 .input-tooltip.icon,
 .input-icon.icon {
   display: none;
+}
+
+.subschema,
+.required-fields-label {
+  @extend .font-family-base;
 }
 
 #okta-signin-username,
@@ -224,30 +259,28 @@ html {
   }
 }
 
-.o-form-button-bar {
-  .button-primary {
-    @extend .font-family-base;
-    background-color: $cr-blue !important;
-    background-image: none !important;
-    border: 0 !important;
-    border-radius: 4px !important;
-    font-size: 16px !important;
-  }
+.button-primary {
+  @extend .font-family-base;
+
+  background-color: $cr-blue !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  font-size: 16px !important;
 }
 
 .auth-divider {
-  color: $cr-gray-light;
   background-color: $cr-gray-lighter !important;
+  color: $cr-gray-light;
 
   .auth-divider-text {
-    top: -0.6em !important;
+    top: -.6em !important;
   }
 }
 
 .link.help {
   color: $cr-cyan !important;
   font-size: 14px !important;
-
 }
 
 .registration-container {
@@ -257,9 +290,9 @@ html {
     @extend .font-family-base;
 
     border-top-color: $cr-gray-lighter !important;
-    padding-top: 15px !important;
     padding-bottom: 0 !important;
     padding-left: 0 !important;
+    padding-top: 15px !important;
 
     .registration-label,
     .registration-link {
@@ -273,6 +306,22 @@ html {
       @media (min-width: $screen-sm) {
         display: inline;
       }
+    }
+  }
+}
+
+.registration-complete {
+  .o-form-content {
+    @extend .font-family-base;
+
+    span {
+      display: inline-block;
+      font-size: 16px;
+      padding-bottom: 12px;
+    }
+
+    h2 {
+      @extend .font-size-h6;
     }
   }
 }
