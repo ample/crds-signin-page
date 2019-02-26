@@ -189,6 +189,13 @@ html {
 
     .okta-form-input-error {
       color: $alert-danger;
+      padding-left: 0;
+
+      @extend .help-block;
+
+      .icon {
+        display: none;
+      }
     }
 
     .o-form-input,
