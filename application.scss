@@ -110,9 +110,47 @@ html {
 
   &.auth-container {
     .okta-form-input-field {
-      background-color: #f4f4f4 !important;
+      $input-color: #f4f4f4;
+
+      background-color: $input-color !important;
+      border-color: $input-color;
+      border-radius: 0;
       color: $cr-gray-dark !important;
-      font-size: 16px !important;
+      display: block !important;
+      height: 42px !important;
+
+      &:focus,
+      &:focus-within {
+        border-color: $cr-cyan-light;
+      }
+
+      &:hover {
+        border-color: $input-color;
+      }
+
+      input {
+        padding-left: 10px !important;
+
+        &::placeholder,
+        &[type='text'],
+        &[type='password'] {
+          @extend .font-family-base;
+
+          font-size: 16px;
+        }
+
+        &:focus {
+          box-shadow: inset 0 0 0 1px rgba($cr-cyan-light, .5) !important;
+        }
+      }
+
+      &.o-form-has-errors {
+        border-color: $alert-danger;
+
+        input {
+          box-shadow: inset 0 0 0 1px rgba($alert-danger, .5) !important;
+        }
+      }
     }
 
     .auth-content {
@@ -151,28 +189,6 @@ html {
   }
 
   .o-form {
-    .o-form-input {
-      border: 0;
-      line-height: 18px !important;
-
-      input {
-        padding-left: 10px !important;
-
-        &::placeholder,
-        &[type='text'],
-        &[type='password'] {
-          @extend .font-family-base;
-
-          font-size: 16px;
-        }
-      }
-    }
-
-    .input-fix {
-      border: none !important;
-      height: 42px !important;
-    }
-
     .okta-form-input-error,
     .okta-form-infobox-error {
       @extend .font-family-base;
@@ -326,7 +342,7 @@ html {
 
     span {
       display: inline-block;
-      font-size: 16px;
+      font-size: 16px !important;
       padding-bottom: 12px;
     }
 
