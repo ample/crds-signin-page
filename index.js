@@ -50,6 +50,8 @@ function getOktaConfig() {
     ],
     i18n: {
       en: {
+        'account.unlock.email.or.username.placeholder': 'Email',
+        'password.forgot.email.or.username.placeholder': 'Email',
         'primaryauth.username.placeholder': 'Email',
         'registration.signup.label': 'New to Crossroads?',
         'registration.signup.text': 'Create an account.',
@@ -145,3 +147,101 @@ function redirectToOriginUrl() {
     window.location.replace('https://www.crossroads.net');
   }
 }
+
+function trackClicks() {
+  const createAccountLink = $('.registration-link');
+  const facebookButton = $('.social-auth-facebook-button');
+  const forgotPasswordLink = $('.js-forgot-password');
+  const helpLink = $('.js-help-link');
+  const registerButton = $('.registration .button-primary');
+  const resetViaEmail = $('.forgot-password .email-button');
+  const signInButton = $('#okta-signin-submit.button-primary');
+  const unlockAccountLink = $('.js-unlock');
+  const unlockSendEmail = $('.account-unlock .email-button');
+
+  if (createAccountLink) {
+    createAccountLink.click(function() {
+      analytics.track('CreateAccountLinkClicked', {});
+    });
+  }
+
+  if (facebookButton) {
+    facebookButton.click(function() {
+      analytics.track('SignInFacebookButtonClicked', {});
+    });
+  }
+
+  if (forgotPasswordLink) {
+    forgotPasswordLink.click(function() {
+      analytics.track('ForgotPasswordLinkClicked', {});
+    });
+  }
+
+  if (helpLink) {
+    helpLink.click(function() {
+      analytics.track('HelpLinkClicked', {});
+    });
+  }
+
+  if (registerButton) {
+    registerButton.click(function() {
+      console.log('RegisterButtonClicked');
+
+      analytics.track('RegisterButtonClicked', {
+        email: $('.o-form-input-name-email')
+          .find('input')
+          .val(),
+        'first-name': $('.o-form-input-name-firstName')
+          .find('input')
+          .val(),
+        'last-name': $('.o-form-input-name-lastName')
+          .find('input')
+          .val(),
+      });
+    });
+  }
+
+  if (resetViaEmail) {
+    resetViaEmail.click(function() {
+      analytics.track('ResetViaEmailClicked', {
+        email: $('.o-form-input-name-username')
+          .find('input')
+          .val(),
+      });
+    });
+  }
+
+  if (signInButton) {
+    signInButton.click(function() {
+      console.log('SignInButtonClicked');
+
+      analytics.track('SignInButtonClicked', {
+        email: $('.o-form-input-name-username')
+          .find('input')
+          .val(),
+      });
+    });
+  }
+
+  if (unlockAccountLink) {
+    unlockAccountLink.click(function() {
+      analytics.track('UnlockAccountLinkClicked', {});
+    });
+  }
+
+  if (unlockSendEmail) {
+    unlockSendEmail.click(function() {
+      analytics.track('UnlockAccountSendEmailClicked', {
+        email: $('.o-form-input-name-username')
+          .find('input')
+          .val(),
+      });
+    });
+  }
+}
+
+oktaSignInWidget.on('pageRendered', function() {
+  console.log('Page Rendered');
+
+  trackClicks();
+});
