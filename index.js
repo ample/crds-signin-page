@@ -1,5 +1,6 @@
 var Utilities = require('./utilities');
-var utils = new Utilities();
+var debug = false;
+var utils = new Utilities(debug);
 
 var OktaSignIn = require('@okta/okta-signin-widget');
 var oktaSignInConfig = getOktaConfig();
@@ -61,7 +62,8 @@ function getOktaConfig() {
 }
 
 function setTokensFromUrlAndRedirect() {
-  console.log('Tokens found in url');
+  utils.log('Tokens found in url');
+
   oktaSignInWidget.token.parseTokensFromUrl(
     function success(res) {
       addTokensToManager(res);
@@ -118,14 +120,14 @@ function setRedirectUrl() {
 }
 
 function showSignInWidget() {
-  console.log('No tokens in url, showing sign in screen');
+  utils.log('No tokens in url, showing sign in screen');
 
   //Render the sign in widget
   oktaSignInWidget.renderEl(
     { el: '#widget-container' },
     function() {},
     function(err) {
-      console.err(err);
+      console.error(err);
     }
   );
 }
@@ -133,7 +135,8 @@ function showSignInWidget() {
 function addTokensToManager(res) {
   oktaSignInWidget.tokenManager.add('id_token', res[0]);
   oktaSignInWidget.tokenManager.add('access_token', res[1]);
-  console.log('Set your tokens in the manager');
+
+  utils.log('Set your tokens in the manager');
 }
 
 function redirectToOriginUrl() {
@@ -159,34 +162,32 @@ function trackClicks() {
   const unlockAccountLink = $('.js-unlock');
   const unlockSendEmail = $('.account-unlock .email-button');
 
-  if (createAccountLink) {
+  if (createAccountLink.length > 0) {
     createAccountLink.click(function() {
       analytics.track('CreateAccountLinkClicked', {});
     });
   }
 
-  if (facebookButton) {
+  if (facebookButton.length > 0) {
     facebookButton.click(function() {
       analytics.track('SignInFacebookButtonClicked', {});
     });
   }
 
-  if (forgotPasswordLink) {
+  if (forgotPasswordLink.length > 0) {
     forgotPasswordLink.click(function() {
       analytics.track('ForgotPasswordLinkClicked', {});
     });
   }
 
-  if (helpLink) {
+  if (helpLink.length > 0) {
     helpLink.click(function() {
       analytics.track('HelpLinkClicked', {});
     });
   }
 
-  if (registerButton) {
+  if (registerButton.length > 0) {
     registerButton.click(function() {
-      console.log('RegisterButtonClicked');
-
       analytics.track('RegisterButtonClicked', {
         email: $('.o-form-input-name-email')
           .find('input')
@@ -201,7 +202,7 @@ function trackClicks() {
     });
   }
 
-  if (resetViaEmail) {
+  if (resetViaEmail.length > 0) {
     resetViaEmail.click(function() {
       analytics.track('ResetViaEmailClicked', {
         email: $('.o-form-input-name-username')
@@ -211,10 +212,8 @@ function trackClicks() {
     });
   }
 
-  if (signInButton) {
+  if (signInButton.length > 0) {
     signInButton.click(function() {
-      console.log('SignInButtonClicked');
-
       analytics.track('SignInButtonClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
@@ -223,13 +222,13 @@ function trackClicks() {
     });
   }
 
-  if (unlockAccountLink) {
+  if (unlockAccountLink.length > 0) {
     unlockAccountLink.click(function() {
       analytics.track('UnlockAccountLinkClicked', {});
     });
   }
 
-  if (unlockSendEmail) {
+  if (unlockSendEmail.length > 0) {
     unlockSendEmail.click(function() {
       analytics.track('UnlockAccountSendEmailClicked', {
         email: $('.o-form-input-name-username')
@@ -241,7 +240,5 @@ function trackClicks() {
 }
 
 oktaSignInWidget.on('pageRendered', function() {
-  console.log('Page Rendered');
-
   trackClicks();
 });
