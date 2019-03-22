@@ -1,7 +1,19 @@
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="node_modules/@okta/okta-signin-widget/dist/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/>
-    <link href="node_modules/@okta/okta-signin-widget/dist/css/okta-theme.css" type="text/css" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="node_modules/@okta/okta-signin-widget/dist/css/okta-sign-in.min.css" type="text/css" rel="stylesheet" />
+  <link href="node_modules/@okta/okta-signin-widget/dist/css/okta-theme.css" type="text/css" rel="stylesheet" />
+  <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-MFS4MJ');
+  </script>
 </head>
 
 <div class="crds-shared-header">
@@ -17,7 +29,10 @@
         </svg>
 
         <h3>Community is waiting</h3>
-        <p>Impedit ab, mollitia, veniam nihil ipsum tempore beatae totam corrupti possimus officia accusamus. Quam, aliquam! Quas porro delectus unde. Labore, dicta omnis.</p>
+        <p>
+          Impedit ab, mollitia, veniam nihil ipsum tempore beatae totam corrupti possimus officia accusamus. Quam,
+          aliquam! Quas porro delectus unde. Labore, dicta omnis.
+        </p>
 
         <div class="list-content">
           <p><strong>An account at Crossroads enables you to:</strong></p>
@@ -37,10 +52,26 @@
 <div data-footer class="site-footer"></div>
 
 <script src="//use.typekit.net/ccb3vpa.js"></script>
-<script>try{Typekit.load({ async: true });}catch(e){}</script>
-<script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/svg4everybody/2.1.8/svg4everybody.min.js" integrity="sha256-pIGAtb2iLTkdlitz09ojYyRBq5I6jgJiiZ2nprCdam0=" crossorigin="anonymous"></script>
+<script>
+  try {
+    Typekit.load({ async: true });
+  } catch (e) {}
+</script>
+<script
+  src="//code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"
+></script>
+<script
+  src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+  crossorigin="anonymous"
+></script>
+<script
+  src="//cdnjs.cloudflare.com/ajax/libs/svg4everybody/2.1.8/svg4everybody.min.js"
+  integrity="sha256-pIGAtb2iLTkdlitz09ojYyRBq5I6jgJiiZ2nprCdam0="
+  crossorigin="anonymous"
+></script>
 <script src="//cdn.jsdelivr.net/g/mutationobserver/"></script>
 <script src="//cdn.rawgit.com/imgix/imgix.js/d5aa14bb34c574f4d0052a28fb389c7844037f80/dist/imgix.js"></script>
 <script src="//d1tmclqz61gqwd.cloudfront.net/javascripts/crds-shared-header-v0.7.3.min.js"></script>
@@ -53,14 +84,14 @@
     appEndpoint: process.env.CRDS_APP_ENDPOINT,
     cmsEndpoint: process.env.CRDS_CMS_ENDPOINT,
     imgEndpoint: process.env.CRDS_GATEWAY_ENDPOINT,
-    crdsCookiePrefix: process.env.CRDS_COOKIE_PREFIX
+    crdsCookiePrefix: process.env.CRDS_COOKIE_PREFIX,
   };
   var header = new CRDS.SharedHeader(options);
-      header.render();
+  header.render();
 
   var footer = new CRDS.SharedFooter();
 
-  $('[data-header]').on('show.bs.dropdown', function () {
+  $('[data-header]').on('show.bs.dropdown', function() {
     CRDS.CurrentSeries.process();
   });
 </script>
