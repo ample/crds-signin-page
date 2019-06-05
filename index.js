@@ -2,7 +2,7 @@ var Utilities = require('./utilities');
 var debug = false;
 var utils = new Utilities(debug);
 
-var OktaSignIn = require('@okta/okta-signin-widget');
+var OktaSignIn = require('@okta/okta-signin-widget/dist/js/okta-sign-in.min.js');
 var oktaSignInConfig = getOktaConfig();
 var oktaSignInWidget = new OktaSignIn(oktaSignInConfig);
 
