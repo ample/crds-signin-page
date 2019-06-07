@@ -3,7 +3,7 @@ var debug = false;
 var utils = new Utilities(debug);
 const contentful = require("contentful");
 
-var OktaSignIn = require('@okta/okta-signin-widget');
+var OktaSignIn = require('@okta/okta-signin-widget/dist/js/okta-sign-in.min.js');
 var oktaSignInConfig = getOktaConfig();
 var oktaSignInWidget = new OktaSignIn(oktaSignInConfig);
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
@@ -28,8 +28,7 @@ function getOktaConfig() {
   var oktaBaseUrl = process.env.OKTA_BASE_URL;
   var oktaClientId = process.env.OKTA_CLIENT_ID;
   var oktaRedirectUri = process.env.OKTA_REDIRECT_URI;
-  var oktaFacebookId = process.env.OKTA_FACEBOOK_CLIENT_ID;
-
+  // var oktaFacebookId = process.env.OKTA_FACEBOOK_CLIENT_ID;
   // var oktaGoogleId = process.env.OKTA_GOOGLE_CLIENT_ID;
 
   return {
@@ -52,7 +51,7 @@ function getOktaConfig() {
       scopes: ['openid', 'profile', 'email'],
     },
     idps: [
-      { type: 'FACEBOOK', id: oktaFacebookId },
+      // { type: 'FACEBOOK', id: oktaFacebookId },
       // { type: "GOOGLE", id: oktaGoogleId },
     ],
     i18n: {
@@ -73,12 +72,6 @@ function setTokensFromUrlAndRedirect() {
   oktaSignInWidget.token.parseTokensFromUrl(
     function success(res) {
       addTokensToManager(res);
-      // check access token for mpContactId
-      // If no mpContactId
-      // Then assume this is a brand new account
-      // Send request to crossroads backend to create an mp account
-      // wait for this to happen - spinny UI
-      //
       redirectToOriginUrl();
     },
     function error(err) {
@@ -102,7 +95,6 @@ function checkForAndHandleSession() {
 
 function handleActiveSession() {
   if (isAccountActivation()) {
-    // TODO: Create their MP Account
     // When that's done
     redirectToOriginUrl();
   } else {
