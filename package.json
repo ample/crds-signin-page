@@ -22,6 +22,7 @@
   "dependencies": {
     "@okta/okta-auth-js": "2.2.0",
     "@okta/okta-signin-widget": "^2.14.0",
+    "contentful": "^7.6.0",
     "crds-shared-header": "^0.7.3",
     "local-web-server": "2.6.0",
     "npm": "^6.5.0",

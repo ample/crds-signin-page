@@ -1,16 +1,21 @@
 var Utilities = require('./utilities');
 var debug = false;
 var utils = new Utilities(debug);
+const contentful = require("contentful");
 
 var OktaSignIn = require('@okta/okta-signin-widget');
 var oktaSignInConfig = getOktaConfig();
 var oktaSignInWidget = new OktaSignIn(oktaSignInConfig);
+const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
+const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
+const CONTENTFUL_ENV = process.env.CONTENTFUL_ENV;
 
 import './application.scss';
 
 init();
 
 function init() {
+  getContent();
   //Handle redirect back to this page:
   if (oktaSignInWidget.token.hasTokensInUrl()) {
     setTokensFromUrlAndRedirect();
@@ -24,6 +29,7 @@ function getOktaConfig() {
   var oktaClientId = process.env.OKTA_CLIENT_ID;
   var oktaRedirectUri = process.env.OKTA_REDIRECT_URI;
   var oktaFacebookId = process.env.OKTA_FACEBOOK_CLIENT_ID;
+
   // var oktaGoogleId = process.env.OKTA_GOOGLE_CLIENT_ID;
 
   return {
@@ -82,7 +88,7 @@ function setTokensFromUrlAndRedirect() {
 }
 
 function checkForAndHandleSession() {
-  oktaSignInWidget.session.get(function(res) {
+  oktaSignInWidget.session.get(function (res) {
     if (res.status === 'ACTIVE') {
       handleActiveSession();
     }
@@ -125,8 +131,8 @@ function showSignInWidget() {
   //Render the sign in widget
   oktaSignInWidget.renderEl(
     { el: '#widget-container' },
-    function() {},
-    function(err) {
+    function () { },
+    function (err) {
       console.error(err);
     }
   );
@@ -151,6 +157,28 @@ function redirectToOriginUrl() {
   }
 }
 
+function getContent() {
+  console.log('getting content')
+  const client = contentful.createClient({
+    // This is the space ID. A space is like a project folder in Contentful terms
+    space: CONTENTFUL_SPACE_ID,
+    environment: CONTENTFUL_ENV,
+    // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+    accessToken: CONTENTFUL_ACCESS_TOKEN
+  });
+  // This API call will request an entry with the specified ID from the space defined at the top, using a space-specific access token.
+  client
+    .getEntries({
+      'content_type': 'content_block',
+      'fields.slug': 'signin',
+    })
+    .then(entries => {
+      document.getElementById("signin-content").innerHTML = entries.items[0].fields.content;
+    })
+    .catch(err => console.log(err));
+}
+
+
 function trackClicks() {
   const createAccountLink = $('.registration-link');
   const facebookButton = $('.social-auth-facebook-button');
@@ -163,31 +191,31 @@ function trackClicks() {
   const unlockSendEmail = $('.account-unlock .email-button');
 
   if (createAccountLink.length > 0) {
-    createAccountLink.click(function() {
+    createAccountLink.click(function () {
       analytics.track('CreateAccountLinkClicked', {});
     });
   }
 
   if (facebookButton.length > 0) {
-    facebookButton.click(function() {
+    facebookButton.click(function () {
       analytics.track('SignInFacebookButtonClicked', {});
     });
   }
 
   if (forgotPasswordLink.length > 0) {
-    forgotPasswordLink.click(function() {
+    forgotPasswordLink.click(function () {
       analytics.track('ForgotPasswordLinkClicked', {});
     });
   }
 
   if (helpLink.length > 0) {
-    helpLink.click(function() {
+    helpLink.click(function () {
       analytics.track('HelpLinkClicked', {});
     });
   }
 
   if (registerButton.length > 0) {
-    registerButton.click(function() {
+    registerButton.click(function () {
       analytics.track('RegisterButtonClicked', {
         email: $('.o-form-input-name-email')
           .find('input')
@@ -203,7 +231,7 @@ function trackClicks() {
   }
 
   if (resetViaEmail.length > 0) {
-    resetViaEmail.click(function() {
+    resetViaEmail.click(function () {
       analytics.track('ResetViaEmailClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
@@ -213,7 +241,7 @@ function trackClicks() {
   }
 
   if (signInButton.length > 0) {
-    signInButton.click(function() {
+    signInButton.click(function () {
       analytics.track('SignInButtonClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
@@ -223,13 +251,13 @@ function trackClicks() {
   }
 
   if (unlockAccountLink.length > 0) {
-    unlockAccountLink.click(function() {
+    unlockAccountLink.click(function () {
       analytics.track('UnlockAccountLinkClicked', {});
     });
   }
 
   if (unlockSendEmail.length > 0) {
-    unlockSendEmail.click(function() {
+    unlockSendEmail.click(function () {
       analytics.track('UnlockAccountSendEmailClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
@@ -239,6 +267,6 @@ function trackClicks() {
   }
 }
 
-oktaSignInWidget.on('pageRendered', function() {
+oktaSignInWidget.on('pageRendered', function () {
   trackClicks();
 });
