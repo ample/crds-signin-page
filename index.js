@@ -23,7 +23,7 @@ function getOktaConfig() {
   var oktaBaseUrl = process.env.OKTA_BASE_URL;
   var oktaClientId = process.env.OKTA_CLIENT_ID;
   var oktaRedirectUri = process.env.OKTA_REDIRECT_URI;
-  var oktaFacebookId = process.env.OKTA_FACEBOOK_CLIENT_ID;
+  // var oktaFacebookId = process.env.OKTA_FACEBOOK_CLIENT_ID;
   // var oktaGoogleId = process.env.OKTA_GOOGLE_CLIENT_ID;
 
   return {
@@ -46,7 +46,7 @@ function getOktaConfig() {
       scopes: ['openid', 'profile', 'email'],
     },
     idps: [
-      { type: 'FACEBOOK', id: oktaFacebookId },
+      // { type: 'FACEBOOK', id: oktaFacebookId },
       // { type: "GOOGLE", id: oktaGoogleId },
     ],
     i18n: {
@@ -67,12 +67,6 @@ function setTokensFromUrlAndRedirect() {
   oktaSignInWidget.token.parseTokensFromUrl(
     function success(res) {
       addTokensToManager(res);
-      // check access token for mpContactId
-      // If no mpContactId
-      // Then assume this is a brand new account
-      // Send request to crossroads backend to create an mp account
-      // wait for this to happen - spinny UI
-      //
       redirectToOriginUrl();
     },
     function error(err) {
@@ -82,7 +76,7 @@ function setTokensFromUrlAndRedirect() {
 }
 
 function checkForAndHandleSession() {
-  oktaSignInWidget.session.get(function(res) {
+  oktaSignInWidget.session.get(function (res) {
     if (res.status === 'ACTIVE') {
       handleActiveSession();
     }
@@ -96,7 +90,6 @@ function checkForAndHandleSession() {
 
 function handleActiveSession() {
   if (isAccountActivation()) {
-    // TODO: Create their MP Account
     // When that's done
     redirectToOriginUrl();
   } else {
@@ -125,8 +118,8 @@ function showSignInWidget() {
   //Render the sign in widget
   oktaSignInWidget.renderEl(
     { el: '#widget-container' },
-    function() {},
-    function(err) {
+    function () { },
+    function (err) {
       console.error(err);
     }
   );
@@ -163,31 +156,31 @@ function trackClicks() {
   const unlockSendEmail = $('.account-unlock .email-button');
 
   if (createAccountLink.length > 0) {
-    createAccountLink.click(function() {
+    createAccountLink.click(function () {
       analytics.track('CreateAccountLinkClicked', {});
     });
   }
 
   if (facebookButton.length > 0) {
-    facebookButton.click(function() {
+    facebookButton.click(function () {
       analytics.track('SignInFacebookButtonClicked', {});
     });
   }
 
   if (forgotPasswordLink.length > 0) {
-    forgotPasswordLink.click(function() {
+    forgotPasswordLink.click(function () {
       analytics.track('ForgotPasswordLinkClicked', {});
     });
   }
 
   if (helpLink.length > 0) {
-    helpLink.click(function() {
+    helpLink.click(function () {
       analytics.track('HelpLinkClicked', {});
     });
   }
 
   if (registerButton.length > 0) {
-    registerButton.click(function() {
+    registerButton.click(function () {
       analytics.track('RegisterButtonClicked', {
         email: $('.o-form-input-name-email')
           .find('input')
@@ -203,7 +196,7 @@ function trackClicks() {
   }
 
   if (resetViaEmail.length > 0) {
-    resetViaEmail.click(function() {
+    resetViaEmail.click(function () {
       analytics.track('ResetViaEmailClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
@@ -213,7 +206,7 @@ function trackClicks() {
   }
 
   if (signInButton.length > 0) {
-    signInButton.click(function() {
+    signInButton.click(function () {
       analytics.track('SignInButtonClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
@@ -223,13 +216,13 @@ function trackClicks() {
   }
 
   if (unlockAccountLink.length > 0) {
-    unlockAccountLink.click(function() {
+    unlockAccountLink.click(function () {
       analytics.track('UnlockAccountLinkClicked', {});
     });
   }
 
   if (unlockSendEmail.length > 0) {
-    unlockSendEmail.click(function() {
+    unlockSendEmail.click(function () {
       analytics.track('UnlockAccountSendEmailClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
@@ -239,6 +232,6 @@ function trackClicks() {
   }
 }
 
-oktaSignInWidget.on('pageRendered', function() {
+oktaSignInWidget.on('pageRendered', function () {
   trackClicks();
 });
