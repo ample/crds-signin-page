@@ -21,6 +21,7 @@
   "homepage": "https://github.com/crdschurch/crds-static#readme",
   "dependencies": {
     "@okta/okta-signin-widget": "2.20.0",
+    "contentful": "^7.6.0",
     "crds-shared-header": "^0.7.3",
     "local-web-server": "2.6.0",
     "npm": "^6.5.0",

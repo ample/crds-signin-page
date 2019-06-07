@@ -1,16 +1,21 @@
 var Utilities = require('./utilities');
 var debug = false;
 var utils = new Utilities(debug);
+const contentful = require("contentful");
 
 var OktaSignIn = require('@okta/okta-signin-widget/dist/js/okta-sign-in.min.js');
 var oktaSignInConfig = getOktaConfig();
 var oktaSignInWidget = new OktaSignIn(oktaSignInConfig);
+const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
+const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
+const CONTENTFUL_ENV = process.env.CONTENTFUL_ENV;
 
 import './application.scss';
 
 init();
 
 function init() {
+  getContent();
   //Handle redirect back to this page:
   if (oktaSignInWidget.token.hasTokensInUrl()) {
     setTokensFromUrlAndRedirect();
@@ -143,6 +148,28 @@ function redirectToOriginUrl() {
     window.location.replace('https://www.crossroads.net');
   }
 }
+
+function getContent() {
+  console.log('getting content')
+  const client = contentful.createClient({
+    // This is the space ID. A space is like a project folder in Contentful terms
+    space: CONTENTFUL_SPACE_ID,
+    environment: CONTENTFUL_ENV,
+    // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+    accessToken: CONTENTFUL_ACCESS_TOKEN
+  });
+  // This API call will request an entry with the specified ID from the space defined at the top, using a space-specific access token.
+  client
+    .getEntries({
+      'content_type': 'content_block',
+      'fields.slug': 'signin',
+    })
+    .then(entries => {
+      document.getElementById("signin-content").innerHTML = entries.items[0].fields.content;
+    })
+    .catch(err => console.log(err));
+}
+
 
 function trackClicks() {
   const createAccountLink = $('.registration-link');
