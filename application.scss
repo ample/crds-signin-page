@@ -1,0 +1,353 @@
+// stylelint-disable declaration-no-important, a11y/font-size-is-readable, a11y/no-display-none, max-nesting-depth
+
+$bootstrap-sass-asset-helper: false;
+$icon-font-path: './node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+$icon-font-name: 'glyphicons-halflings-regular';
+$cr-path-to-icons-sprite: './node_modules/crds-styles/assets/svgs/';
+
+@import './node_modules/crds-styles/assets/stylesheets/crds-styles';
+
+body {
+  background-color: $cr-gray-lighter !important;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+.crds-shared-header {
+  background-color: $cr-white;
+  min-height: 72px;
+}
+
+.okta-sign-in-container {
+  @extend .font-family-base;
+
+  background-image: url('https://crds-cms-uploads.imgix.net/Uploads/explore-opening-bg.jpg?auto=format%2Ccompress');
+  background-size: 100%;
+
+  .icon {
+    $size: 88px;
+
+    height: $size;
+    width: $size;
+  }
+
+  ul {
+    padding-left: 10px !important;
+
+    li {
+      display: flex;
+      list-style: none;
+      padding-bottom: 6px;
+
+      &::before {
+        align-self: center;
+        content: '\25CF';
+        font-size: 10px;
+        padding-right: 6px;
+      }
+    }
+  }
+}
+
+.okta-sign-in-content {
+  color: $cr-white;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1em;
+
+  @media (min-width: $screen-sm) {
+    flex-direction: row;
+    padding-bottom: 2.8rem;
+    padding-top: 2.8rem;
+  }
+
+  @media (min-width: $screen-lg) {
+    padding-left: 7em !important;
+    padding-right: 7em !important;
+  }
+
+  > div {
+    &:first-of-type {
+      @media (max-width: $screen-sm) {
+        margin-top: 40px !important;
+        order: 2;
+      }
+
+      @media (min-width: $screen-sm) {
+        padding-right: 5%;
+        padding-top: 2.8rem;
+      }
+
+      @media (min-width: $screen-md) {
+        padding-right: 10%;
+      }
+    }
+  }
+
+  h3 {
+    color: $cr-white;
+  }
+}
+
+.o-form-fieldset {
+  input {
+    @extend .form-control;
+
+    border: 0 !important;
+  }
+}
+
+.list-content {
+  margin-top: 30px;
+}
+
+#okta-sign-in {
+  margin-top: 0 !important;
+  width: 100% !important;
+
+  &.auth-container {
+    .okta-form-input-field {
+      $input-color: #f4f4f4;
+
+      background-color: $input-color !important;
+      border-color: $input-color;
+      border-radius: 0;
+      color: $cr-gray-dark !important;
+      display: block !important;
+      height: 42px !important;
+
+      &:focus,
+      &:focus-within {
+        border-color: $cr-cyan-light;
+      }
+
+      &:hover {
+        border-color: $input-color;
+      }
+
+      input {
+        padding-left: 10px !important;
+
+        &::placeholder,
+        &[type='text'],
+        &[type='password'] {
+          @extend .font-family-base;
+
+          font-size: 16px;
+        }
+
+        &:focus {
+          box-shadow: inset 0 0 0 1px rgba($cr-cyan-light, .5) !important;
+        }
+      }
+
+      &.o-form-has-errors {
+        border-color: $alert-danger;
+
+        input {
+          box-shadow: inset 0 0 0 1px rgba($alert-danger, .5) !important;
+        }
+      }
+    }
+
+    .auth-content {
+      max-width: 100% !important;
+      padding: 48px 24px !important;
+
+      .help-links {
+        margin-top: 4px;
+
+        li {
+          margin-top: 0 !important;
+          padding-bottom: 2px;
+        }
+      }
+    }
+  }
+
+  .o-form-head {
+    @extend .font-size-h3;
+    @extend .font-family-condensed-extra;
+
+    color: $cr-gray-dark !important;
+    line-height: 36px !important;
+    margin-top: 0 !important;
+    text-align: left !important;
+    text-transform: uppercase !important;
+
+    &::after {
+      @extend .font-family-base;
+
+      content: 'To your Crossroads account';
+      display: block;
+      font-size: 16px;
+      text-transform: initial;
+    }
+  }
+
+  .o-form {
+    .okta-form-input-error,
+    .okta-form-infobox-error {
+      @extend .font-family-base;
+    }
+
+    .okta-form-infobox-error {
+      @extend .alert;
+      @extend .alert-danger;
+
+      padding-left: 1rem !important;
+
+      &::before,
+      .icon {
+        display: none;
+      }
+    }
+
+    .okta-form-input-error {
+      color: $alert-danger;
+      padding-left: 0;
+
+      @extend .help-block;
+
+      .icon {
+        display: none;
+      }
+    }
+
+    .o-form-input,
+    .o-form-explain {
+      padding-top: 6px;
+    }
+  }
+
+  .auth-footer {
+    @extend .font-family-base;
+
+    font-size: 14px !important;
+  }
+
+  .social-auth-button {
+    @extend .font-family-base;
+
+    background: none !important;
+    border-color: $cr-blue !important;
+    color: $cr-blue !important;
+    font-size: 16px !important;
+    padding-left: 48px !important;
+
+    &.link-button {
+      &:last-of-type {
+        margin-bottom: 20px !important;
+      }
+    }
+  }
+
+  .social-auth-facebook-button {
+    background: url('./public/assets/svgs/icon-facebook-oauth.svg') no-repeat 10px !important;
+  }
+
+  .social-auth-google-button {
+    background: url('./public/assets/svgs/icon-google-oauth.svg') no-repeat 10px !important;
+  }
+}
+
+.auth-container {
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.auth-header,
+.input-tooltip.icon,
+.input-icon.icon {
+  display: none;
+}
+
+.subschema,
+.required-fields-label {
+  @extend .font-family-base;
+}
+
+#okta-signin-username,
+#okta-signin-password {
+  font-family: $base-font-face !important;
+  font-size: 16px !important;
+  font-weight: 100 !important;
+}
+
+.custom-checkbox {
+  @extend .font-family-base;
+
+  label {
+    font-size: 14px !important;
+  }
+}
+
+.button-primary {
+  @extend .font-family-base;
+
+  background-color: $cr-blue !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  font-size: 16px !important;
+}
+
+.auth-divider {
+  background-color: $cr-gray-lighter !important;
+  color: $cr-gray-light;
+
+  .auth-divider-text {
+    top: -.6em !important;
+  }
+}
+
+.link.help {
+  color: $cr-cyan !important;
+  font-size: 14px !important;
+}
+
+.registration-container {
+  margin-top: 15px !important;
+
+  .content-container {
+    @extend .font-family-base;
+
+    border-top-color: $cr-gray-lighter !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-top: 15px !important;
+
+    .registration-label,
+    .registration-link {
+      font-size: 16px !important;
+    }
+
+    .registration-link {
+      display: block;
+      margin-left: 0 !important;
+
+      @media (min-width: $screen-sm) {
+        display: inline;
+      }
+    }
+  }
+}
+
+.registration-complete {
+  .o-form-content {
+    @extend .font-family-base;
+
+    span {
+      display: inline-block;
+      font-size: 16px !important;
+      padding-bottom: 12px;
+    }
+
+    h2 {
+      @extend .font-size-h6;
+    }
+  }
+}
