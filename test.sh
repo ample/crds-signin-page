@@ -1,1 +1,0 @@
-export OKTA_CLIENT_ID=testclientid
