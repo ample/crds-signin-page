@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel index.html -p 8000",
     "test": "JASMINE_CONFIG_PATH=./jasmine.json jasmine",
-    "build": ". test.sh && parcel build *.html",
+    "build": "source test.sh && parcel build *.html",
     "lint.stylesheets": "./node_modules/.bin/stylelint --config stylelint.config.js '**/*.scss' --fix"
   },
   "repository": {
