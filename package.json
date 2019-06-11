@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel index.html -p 8000",
     "test": "JASMINE_CONFIG_PATH=./jasmine.json jasmine",
-    "build": "chmod u+x test.sh && . $NETLIFY_REPO_DIR/test.sh && parcel build *.html",
+    "build": "chmod u+x test.sh && . /opt/repo/test.sh && parcel build *.html",
     "lint.stylesheets": "./node_modules/.bin/stylelint --config stylelint.config.js '**/*.scss' --fix"
   },
   "repository": {
