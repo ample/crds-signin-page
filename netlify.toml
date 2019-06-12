@@ -68,3 +68,31 @@
   CRDS_GATEWAY_ENDPOINT = "https://gatewayint.crossroads.net/gateway/api/image/profile/"
   CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
+
+[context.branch-deploy.environment]
+  CONTENTFUL_ENV = "int"
+  
+  OKTA_BASE_URL = "https://crossroads.oktapreview.com"
+  OKTA_CLIENT_ID = ""
+  OKTA_REDIRECT_URI = "https://crds-signin.netlify.com"
+  # OKTA_FACEBOOK_CLIENT_ID = ""
+  # OKTA_GOOGLE_CLIENT_ID = ""
+
+  CRDS_COOKIE_PREFIX = "int"
+  CRDS_GATEWAY_ENDPOINT = "https://gatewayint.crossroads.net/gateway/api/image/profile/"
+  CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
+  CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
+
+[context.deploy-preview.environment]
+  CONTENTFUL_ENV = "int"
+  
+  OKTA_BASE_URL = "https://crossroads.oktapreview.com"
+  OKTA_CLIENT_ID = ""
+  OKTA_REDIRECT_URI = "https://crds-signin.netlify.com"
+  # OKTA_FACEBOOK_CLIENT_ID = ""
+  # OKTA_GOOGLE_CLIENT_ID = ""
+
+  CRDS_COOKIE_PREFIX = "int"
+  CRDS_GATEWAY_ENDPOINT = "https://gatewayint.crossroads.net/gateway/api/image/profile/"
+  CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
+  CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
