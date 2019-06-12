@@ -150,7 +150,6 @@ function redirectToOriginUrl() {
 }
 
 function getContent() {
-  console.log('getting content')
   const client = contentful.createClient({
     // This is the space ID. A space is like a project folder in Contentful terms
     space: CONTENTFUL_SPACE_ID,
