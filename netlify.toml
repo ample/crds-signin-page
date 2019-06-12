@@ -93,3 +93,9 @@
   CRDS_GATEWAY_ENDPOINT = "https://gatewayint.crossroads.net/gateway/api/image/profile/"
   CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
+
+[[headers]]
+  for = "/*.woff"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "application/font-woff"
