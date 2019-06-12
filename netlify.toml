@@ -34,7 +34,7 @@
   CRDS_GATEWAY_ENDPOINT = "https://gateway.crossroads.net/gateway/api/image/profile/"
   CRDS_APP_ENDPOINT = "https://www.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://content.crossroads.net/"
-    
+  
 
 # Specific branch context: all deploys from this specific branch will inherit
 # these settings.
