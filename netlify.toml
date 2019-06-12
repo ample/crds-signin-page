@@ -25,8 +25,7 @@
   CONTENTFUL_ENV = "master"
   
   OKTA_BASE_URL = "https://crossroads.okta.com"
-  OKTA_CLIENT_ID = ""
-  OKTA_REDIRECT_URI = "https://crds-signin.netlify.com"
+  OKTA_REDIRECT_URI = "https://www.crossroads.net/oktasignin"
   # OKTA_FACEBOOK_CLIENT_ID = ""
   # OKTA_GOOGLE_CLIENT_ID = ""
 
@@ -34,7 +33,7 @@
   CRDS_GATEWAY_ENDPOINT = "https://gateway.crossroads.net/gateway/api/image/profile/"
   CRDS_APP_ENDPOINT = "https://www.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://content.crossroads.net/"
-    
+  
 
 # Specific branch context: all deploys from this specific branch will inherit
 # these settings.
@@ -44,8 +43,7 @@
   CONTENTFUL_ENV = "demo"
   
   OKTA_BASE_URL = "https://crossroads.oktapreview.com"
-  OKTA_CLIENT_ID = ""
-  OKTA_REDIRECT_URI = "https://crds-signin.netlify.com"
+  OKTA_REDIRECT_URI = "https://demo.crossroads.net/oktasignin"
   # OKTA_FACEBOOK_CLIENT_ID = ""
   # OKTA_GOOGLE_CLIENT_ID = ""
 
@@ -59,8 +57,7 @@
   CONTENTFUL_ENV = "int"
   
   OKTA_BASE_URL = "https://crossroads.oktapreview.com"
-  OKTA_CLIENT_ID = ""
-  OKTA_REDIRECT_URI = "https://crds-signin.netlify.com"
+  OKTA_REDIRECT_URI = "https://int.crossroads.net/oktasignin"
   # OKTA_FACEBOOK_CLIENT_ID = ""
   # OKTA_GOOGLE_CLIENT_ID = ""
 
@@ -74,8 +71,7 @@
   CONTENTFUL_ENV = "int"
   
   OKTA_BASE_URL = "https://crossroads.oktapreview.com"
-  OKTA_CLIENT_ID = ""
-  OKTA_REDIRECT_URI = "https://crds-signin.netlify.com"
+  OKTA_REDIRECT_URI = "https://int.crossroads.net/oktasignin"
   # OKTA_FACEBOOK_CLIENT_ID = ""
   # OKTA_GOOGLE_CLIENT_ID = ""
 
@@ -89,8 +85,7 @@
   CONTENTFUL_ENV = "int"
   
   OKTA_BASE_URL = "https://crossroads.oktapreview.com"
-  OKTA_CLIENT_ID = ""
-  OKTA_REDIRECT_URI = "https://crds-signin.netlify.com"
+  OKTA_REDIRECT_URI = "https://int.crossroads.net/oktasignin"
   # OKTA_FACEBOOK_CLIENT_ID = ""
   # OKTA_GOOGLE_CLIENT_ID = ""
 
@@ -98,3 +93,9 @@
   CRDS_GATEWAY_ENDPOINT = "https://gatewayint.crossroads.net/gateway/api/image/profile/"
   CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
+
+[[headers]]
+  for = "/*.woff"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "application/font-woff"

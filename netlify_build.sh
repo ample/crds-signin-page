@@ -11,4 +11,4 @@ else
     export OKTA_CLIENT_ID=${OKTA_CLIENT_ID_SANDBOX}
 fi
 
-parcel build *.html
+parcel build *.html --public-url ${DEPLOY_PRIME_URL}
