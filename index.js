@@ -5,7 +5,11 @@ const contentful = require("contentful");
 
 var OktaSignIn = require('@okta/okta-signin-widget/dist/js/okta-sign-in.min.js');
 var oktaSignInConfig = getOktaConfig();
+
+oktaSignInConfig = handlePasswordRecoveryToken(oktaSignInConfig);
+
 var oktaSignInWidget = new OktaSignIn(oktaSignInConfig);
+
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ENV = process.env.CONTENTFUL_ENV;
@@ -39,7 +43,7 @@ function getOktaConfig() {
       selfServiceUnlock: true, // Will enable unlock in addition to forgotten password
       //smsRecovery: true,                // Enable SMS-based account recovery
       //callRecovery: true,               // Enable voice call-based account recovery
-      //router: true,                       // Leave this set to true for the API demo
+      router: true,                       // Leave this set to true for the API demo
     },
     baseUrl: oktaBaseUrl,
     clientId: oktaClientId,
@@ -78,6 +82,15 @@ function setTokensFromUrlAndRedirect() {
       console.error('handle error', err);
     }
   );
+}
+
+function handlePasswordRecoveryToken(signInConfig) {
+  var recoverPasswordToken = utils.getUrlParam('recovery_token')
+  if (recoverPasswordToken) {
+    oktaSignInConfig.recoveryToken = recoverPasswordToken
+  }
+
+  return signInConfig;
 }
 
 function checkForAndHandleSession() {
