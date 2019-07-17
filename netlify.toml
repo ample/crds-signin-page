@@ -16,6 +16,11 @@
   # Directory with the serverless Lambda functions to deploy to AWS.
 #   functions = "project/functions/"
 
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 # Need this for the environment part to work
 
 # Production context: all deploys from the Production branch set in your site's 
