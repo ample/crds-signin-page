@@ -7,9 +7,9 @@ describe("Cookie Utilities", function () {
       // console.log(document.cookie);
       var url = "https://www.crossroads.net?coolparam=testit";
       document = {
-          cookie: `redirect_url=${url};anotherstring=string`
+          cookie: `redirectUrl=${url};anotherstring=string`
       };
-      const result = utils.getCookie("redirect_url");
+      const result = utils.getCookie("redirectUrl");
       expect(result).toEqual(url);
   });
 

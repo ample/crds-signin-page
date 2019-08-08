@@ -122,9 +122,9 @@ function isAccountActivation() {
 }
 
 function setRedirectUrl() {
-  var redirect_url = utils.getUrlParam('redirect_url');
-  if (redirect_url) {
-    utils.setCookie('redirect_url', redirect_url, 1);
+  var redirectUrl = utils.getUrlParam('redirectUrl');
+  if (redirectUrl) {
+    utils.setCookie('redirectUrl', redirectUrl, 1);
   }
 
   window.history.replaceState(null, null, window.location.pathname);
@@ -151,11 +151,10 @@ function addTokensToManager(res) {
 }
 
 function redirectToOriginUrl() {
-  var redirect_url = utils.getCookie('redirect_url');
-  utils.deleteCookie('redirect_url');
+  var redirectUrl = utils.getCookie('redirectUrl');
 
-  if (redirect_url) {
-    window.location.replace(redirect_url);
+  if (redirectUrl) {
+    window.location.replace(redirectUrl);
   } else {
     //Send them to the homepage
     window.location.replace('https://www.crossroads.net');
