@@ -152,7 +152,6 @@ function addTokensToManager(res) {
 
 function redirectToOriginUrl() {
   var redirectUrl = utils.getCookie('redirectUrl');
-  utils.deleteCookie('redirectUrl');
 
   if (redirectUrl) {
     window.location.replace(redirectUrl);
