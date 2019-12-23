@@ -65,8 +65,6 @@ function getOktaConfig() {
         'primaryauth.username.placeholder': 'Email',
         'registration.signup.label': 'New to Crossroads?',
         'registration.signup.text': 'Create an account.',
-        'error.auth.lockedOut' : 'Your account has been locked due to excess log in attempts. Follow the instructions in you email inbox to unlock.',
-        'errors.E0000119' : 'Your account has been locked due to excess log in attempts. Follow the instructions in you email inbox to unlock.',
       },
     },
   };
