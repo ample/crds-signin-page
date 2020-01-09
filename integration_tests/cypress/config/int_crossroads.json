@@ -1,0 +1,8 @@
+{
+  "baseUrl": "https://int.crossroads.net",
+  "testFiles": "**/*_*spec.*",
+  "video": false,
+  "env":{
+    "signinExtension": "/oktasignin"
+  }
+}

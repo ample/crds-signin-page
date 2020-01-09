@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "types": ["cypress"],
+    "allowJs": false
+  },
+  "include": [
+    "node_modules/cypress",
+    "**/*.ts"
+  ]
+}

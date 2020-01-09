@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "source .env && parcel index.html -p 8000",
+    "start-for-windows": "parcel index.html -p 8000",
     "test": "JASMINE_CONFIG_PATH=./jasmine.json jasmine",
     "build": "parcel build *.html",
     "build-for-netlify": "./netlify_build.sh",
@@ -31,9 +32,9 @@
     "utils.js": "^1.0.1"
   },
   "devDependencies": {
-    "crds-styles": "^3.1.2",
+    "crds-styles": "^3.3.7",
     "jasmine": "^3.3.1",
-    "parcel-bundler": "^1.10.3",
+    "parcel-bundler": "^1.12.4",
     "parcel-plugin-static-files-copy": "^2.0.0",
     "prettier": "^1.16.4",
     "prettier-stylelint": "^0.4.2",
@@ -48,7 +49,7 @@
     "stylelint-declaration-strict-value": "^1.1.2",
     "stylelint-formatter-pretty": "^1.0.3",
     "stylelint-high-performance-animation": "^1.1.1",
-    "stylelint-images": "^2.0.0",
+    "stylelint-images": "^2.0.1",
     "stylelint-no-indistinguishable-colors": "^1.2.1",
     "stylelint-no-unsupported-browser-features": "^3.0.2",
     "stylelint-order": "^2.0.0",
