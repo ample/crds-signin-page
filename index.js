@@ -13,6 +13,7 @@ var oktaSignInWidget = new OktaSignIn(oktaSignInConfig);
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ENV = process.env.CONTENTFUL_ENV;
+const CRDS_APP_ENDPOINT = process.env.CRDS_APP_ENDPOINT;
 
 import './application.scss';
 
@@ -126,7 +127,6 @@ function setRedirectUrl() {
   if (redirectUrl) {
     utils.setCookie('redirectUrl', redirectUrl, 1);
   }
-
   window.history.replaceState(null, null, window.location.pathname);
 }
 
@@ -157,7 +157,7 @@ function redirectToOriginUrl() {
     window.location.replace(redirectUrl);
   } else {
     //Send them to the homepage
-    window.location.replace('https://www.crossroads.net');
+    window.location.replace(CRDS_APP_ENDPOINT);
   }
 }
 

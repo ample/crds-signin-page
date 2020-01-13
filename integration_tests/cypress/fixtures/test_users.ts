@@ -1,13 +1,15 @@
 import { TestUser } from '../interfaces/TestUser';
 
-// Use for Signin tests
-export const signinUser: TestUser = { //TODO create real test user
-  username: 'mingogirl@gmail.com',
-  password: Cypress.env('MINGO_PW'),
-  oktaId: '00uojf2ew2yQtRjhr0h7',
-  mpContactId: '7824100'
+/* Use for Signin tests */
+// Active user
+export const signinUser: TestUser = {
+  username: 'mpcrds+auto+signin-page+golden_goose@gmail.com',
+  password: Cypress.env('TEST_PASSWORD_GOOSE'),
+  oktaId: '00up8je0l2LwY5XVw0h7',
+  mpContactId: '7835155'
 };
 
+// Unverified email
 export const unverifiedEmailUser: TestUser = {
   username: 'mpcrds+auto+signin-page+busy_bee@gmail.com',
   password: Cypress.env('TEST_PASSWORD_BEE'),
@@ -15,6 +17,8 @@ export const unverifiedEmailUser: TestUser = {
   mpContactId: '7834596'
 }
 
+// Use for locked out testing
+//   Okta auto-unlocks after some time so account will need to be re-locked
 export const lockedOutUser: TestUser = {
   username: 'mpcrds+auto+signin-page+edward_scissorhands@gmail.com',
   password: Cypress.env('TEST_PASSWORD_SCISSORHANDS'),

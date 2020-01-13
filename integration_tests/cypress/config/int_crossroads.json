@@ -3,6 +3,8 @@
   "testFiles": "**/*_*spec.*",
   "video": false,
   "env":{
-    "signinExtension": "/oktasignin"
+    "signinExtension": "/oktasignin",
+    "homepage": "https://int.crossroads.net",
+    "vaultEnv": "local"
   }
 }

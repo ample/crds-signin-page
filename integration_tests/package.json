@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test_int": "cypress open --config-file .\\cypress\\config\\int_crossroads.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test_local": "cypress open --config-file .\\cypress\\config\\localhost.json"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +13,10 @@
   "devDependencies": {
     "@bahmutov/add-typescript-to-cypress": "^2.1.2",
     "@cypress/webpack-preprocessor": "^4.1.1",
+    "@types/node": "^13.1.6",
+    "crds-cypress-config": "^1.0.0",
     "cypress": "^3.8.1",
+    "http-status-codes": "^1.4.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.4",
     "webpack": "^4.41.5"
