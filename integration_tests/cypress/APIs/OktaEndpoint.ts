@@ -3,46 +3,46 @@ export class OktaEndpoint {
    *   even if cookies and local storage is cleared. Call this function to force an open session to end before
    *   each test.
    */
-  public static endCurrentSession(){
+  public static endCurrentSession() {
     const endSessionRequest = {
       method: 'DELETE',
       url: `${Cypress.env('OKTA_ENDPOINT')}/api/v1/sessions/me`,
       failOnStatusCode: false
-    }
+    };
 
     cy.request(endSessionRequest);
-  };
+  }
 
   /*
   * Okta admins cannot set a user's state to "locked out" directly, so this attempts to authenticate a user
   *    using an invalid password until the user is locked out.
   * Note that a user account is automatically unlocked after some time has passed.
   */
-  public static lockOutUser(username: string){
+  public static lockOutUser(username: string) {
     const lockOutRequest = {
       method: 'POST',
       url: `${Cypress.env('OKTA_ENDPOINT')}/api/v1/authn`,
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
       body: {
-        username: username,
-        password: "123"
+        username,
+        password: '123'
       },
       failOnStatusCode: false
-    }
+    };
 
-    const makeRequest = (count) => {
+    const makeRequest = (count: number) => {
       cy.request(lockOutRequest)
       .then((resp) => {
-        if(resp.body.status == "LOCKED_OUT" || count <= 0) {
+        if (resp.body.status === 'LOCKED_OUT' || count <= 0) {
           return;
         }
 
-        var newCount = --count;
-        makeRequest(newCount)
-      })
-    }
+        const newCount = --count;
+        makeRequest(newCount);
+      });
+    };
 
     const countToLockout = 10;
     makeRequest(countToLockout);

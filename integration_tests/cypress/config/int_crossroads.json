@@ -5,6 +5,6 @@
   "env":{
     "signinExtension": "/oktasignin",
     "homepage": "https://int.crossroads.net",
-    "vaultEnv": "local"
+    "vaultEnv": "int"
   }
 }

@@ -1,9 +1,9 @@
-import { OktaEndpoint } from "../../APIs/OktaEndpoint";
-import { signinUser } from "../../fixtures/test_users";
-import { fillAndSubmitSignInForm, ignoreUncaughtException, listenForAuthn } from "./sign_in_form_helper";
+import { OktaEndpoint } from '../../APIs/OktaEndpoint';
+import { signinUser } from '../../fixtures/test_users';
+import { fillAndSubmitSignInForm, ignoreUncaughtException, listenForAuthn } from './sign_in_form_helper';
 
-describe('Sign in scenarios', ()=>{
-  beforeEach(() =>{
+describe('Sign in scenarios', () => {
+  beforeEach(() => {
     OktaEndpoint.endCurrentSession();
     cy.clearLocalStorage();
 
@@ -18,11 +18,11 @@ describe('Sign in scenarios', ()=>{
       // ignoreUncaughtException();
 
       // Navigate to some page
-      var startingPage = `${Cypress.config().baseUrl}/groups/`;
+      const startingPage = `${Cypress.config().baseUrl}/groups/`;
       cy.visit(startingPage);
 
       // Sign in
-      cy.visit(Cypress.env("signinExtension"));
+      cy.visit(Cypress.env('signinExtension'));
       fillAndSubmitSignInForm(signinUser.username, signinUser.password);
 
       // Verify url and token set
