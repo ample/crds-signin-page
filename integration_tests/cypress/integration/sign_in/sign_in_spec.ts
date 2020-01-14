@@ -3,15 +3,16 @@ import { OktaEndpoint } from '../../APIs/OktaEndpoint';
 import { lockedOutUser, signinUser, unverifiedEmailUser } from '../../fixtures/test_users';
 import { fillAndSubmitSignInForm, ignoreUncaughtException, listenForAuthn, verifyUIErrorMessage } from './sign_in_form_helper';
 
-// TODO fix uncaught exception issue - looks like it's broken on int, not running locally - probs an update problem
+// TODO dockerize for Team City - TODO fix up issues - connect to cypress dashboard and turn on video for debugging.
 // TODO cleanup todos in this and dedupe
-// TODO linting
-// TODO dockerize for Team City
+// TODO stub out problematic calls for HP load and other page loads?
+// TODO readme for running tests
+// TODO look at unit tests
 
 describe('Sign in scenarios', () => {
   beforeEach(() => {
     OktaEndpoint.endCurrentSession();
-    cy.clearLocalStorage();
+    // cy.clearLocalStorage();
 
     listenForAuthn();
   });
@@ -21,16 +22,20 @@ describe('Sign in scenarios', () => {
       // TODO has issues with setting property "status" of undefined. Dirty workaround here
       // //ignoreUncaughtException();
 
+      // If this always returns nothing, will always fail with analytics error? NO. failure does not happen
+      // cy.route('/api/contentblock?category[]=common', {});
+
       // Sign in
+      // TODO try waiting until window.analytics is true before continuing? analytics triggered when page rendered
+      // TODO try waiting for pagerendered call before continuing?
       cy.visit(Cypress.env('signinExtension'));
+      // cy.wait('@contentBlock');
+      // // cy.window().should('have.property', 'analytics'); //TODO temp tests
       fillAndSubmitSignInForm(signinUser.username, signinUser.password);
 
       // Verify url and token set
-      cy.url().should('eq', `${Cypress.env('homepage')}/`);
+      cy.url().should('contain', `${Cypress.env('homepage')}/`);
       cy.window().its('localStorage').should('have.property', 'okta-token-storage');
-
-      // TODO stub out problematic calls for HP load and other page loads
-      // TODO get this to run, then update all the dependencies in the main package - they're really out of date
     });
   });
 
@@ -41,6 +46,7 @@ describe('Sign in scenarios', () => {
       // Sign in
       const unregisteredEmail = `fake-${signinUser.username}`;
       cy.visit(Cypress.env('signinExtension'));
+      // cy.window().should('have.property', 'analytics'); // TODO temp tests
       fillAndSubmitSignInForm(unregisteredEmail, signinUser.password);
 
       // Verify response
@@ -57,6 +63,7 @@ describe('Sign in scenarios', () => {
       // Sign In
       const malformedEmail = `fakemail.fakemail.com`;
       cy.visit(Cypress.env('signinExtension'));
+      // cy.window().should('have.property', 'analytics'); // TODO temp tests
       fillAndSubmitSignInForm(malformedEmail, signinUser.password);
 
       // Verify response
@@ -73,6 +80,7 @@ describe('Sign in scenarios', () => {
       // Sign in
       const fakePassword = 'oupwpo48pu19roi;nwg';
       cy.visit(Cypress.env('signinExtension'));
+      // cy.window().should('have.property', 'analytics'); // TODO temp tests
       fillAndSubmitSignInForm(signinUser.username, fakePassword);
 
       // Verify response
@@ -90,6 +98,7 @@ describe('Sign in scenarios', () => {
 
       // Sign in
       cy.visit(Cypress.env('signinExtension'));
+      // cy.window().should('have.property', 'analytics'); // TODO temp tests
       fillAndSubmitSignInForm(unverifiedEmailUser.username, unverifiedEmailUser.password);
 
       // Verify response
@@ -106,6 +115,7 @@ describe('Sign in scenarios', () => {
 
       // Sign in
       cy.visit(Cypress.env('signinExtension'));
+      // cy.window().should('have.property', 'analytics'); // TODO temp tests
       fillAndSubmitSignInForm(lockedOutUser.username, lockedOutUser.password);
 
       // Verify response

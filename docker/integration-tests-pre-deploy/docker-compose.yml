@@ -1,0 +1,38 @@
+version: '3'
+services:
+  signin-page:
+    build:
+      context: ../../
+      dockerfile: ./docker/integration-tests-pre-deploy/signin-page/Dockerfile
+    container_name: signin_page
+    image: crdschurch/crds-signin-page:${DOCKER_TAG:-local}
+    environment:
+    - OKTA_BASE_URL=$OKTA_BASE_URL
+    - OKTA_CLIENT_ID=$OKTA_CLIENT_ID
+    - OKTA_REDIRECT_URI=$OKTA_REDIRECT_URI
+    - CRDS_APP_ENDPOINT=$CRDS_APP_ENDPOINT
+    - CRDS_GATEWAY_ENDPOINT=$CRDS_GATEWAY_ENDPOINT
+    - CRDS_COOKIE_PREFIX=$CRDS_COOKIE_PREFIX
+    - CRDS_CMS_ENDPOINT=$CRDS_CMS_ENDPOINT
+    - CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN
+    - CONTENTFUL_SPACE_ID=$CONTENTFUL_SPACE_ID
+    - CONTENTFUL_ENV=$CONTENTFUL_ENV
+    ports:
+      - "8000:8000"
+    entrypoint: npm run start-for-windows
+  integration_tests:
+    build:
+      context: ../../
+      dockerfile: ./docker/integration-tests-pre-deploy/cypress/Dockerfile
+    container_name: cypress_signin-page_integration
+    image: crdschurch/crds-service-signin-page-integration:${DOCKER_TAG:-local}
+    depends_on:
+      - signin-page
+    environment:
+      - CYPRESS_baseUrl=http://signin-page:8000 #This must be a fully qualified domain name
+      # - CYPRESS_vaultEnv=$CRDS_ENV
+      - VAULT_ROLE_ID=$VAULT_ROLE_ID
+      - VAULT_SECRET_ID=$VAULT_SECRET_ID
+    entrypoint: > #may not need /pre-deploy-integration/ part?
+      /pre-deploy-integration/wait-for-it.sh signin-page:8000
+      -- npm run test_local

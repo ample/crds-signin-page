@@ -1,5 +1,5 @@
 var Utilities = require('./utilities');
-var debug = false;
+var debug = true;
 var utils = new Utilities(debug);
 const contentful = require("contentful");
 
@@ -21,7 +21,7 @@ init();
 
 function init() {
   getContent();
-  //Handle redirect back to this page:
+    //Handle redirect back to this page:
   if (oktaSignInWidget.token.hasTokensInUrl()) {
     setTokensFromUrlAndRedirect();
   } else {
@@ -35,7 +35,7 @@ function getOktaConfig() {
   var oktaRedirectUri = process.env.OKTA_REDIRECT_URI;
   // var oktaFacebookId = process.env.OKTA_FACEBOOK_CLIENT_ID;
   // var oktaGoogleId = process.env.OKTA_GOOGLE_CLIENT_ID;
-
+  utils.log(`DEBUG!!! getOktaConfig redirectUrl = ${oktaRedirectUri}`);
   return {
     features: {
       registration: true, // Enable self-service registration flow
@@ -178,9 +178,16 @@ function getContent() {
     .then(entries => {
       document.getElementById("signin-content").innerHTML = entries.items[0].fields.content;
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 }
 
+function analyticsTrack(eventName, payload){
+  console.log(`DEBUG!!!! trying to track analytics. Is analytics defined? ${window.analytics !== undefined}`); //TODO remove
+  if(window.analytics !== undefined)
+  {
+    window.analytics.track(eventName, payload);
+  }
+}
 
 function trackClicks() {
   const createAccountLink = $('.registration-link');
@@ -195,31 +202,31 @@ function trackClicks() {
 
   if (createAccountLink.length > 0) {
     createAccountLink.click(function () {
-      analytics.track('CreateAccountLinkClicked', {});
+      analyticsTrack('CreateAccountLinkClicked', {});
     });
   }
 
   if (facebookButton.length > 0) {
     facebookButton.click(function () {
-      analytics.track('SignInFacebookButtonClicked', {});
+      analyticsTrack('SignInFacebookButtonClicked', {});
     });
   }
 
   if (forgotPasswordLink.length > 0) {
     forgotPasswordLink.click(function () {
-      analytics.track('ForgotPasswordLinkClicked', {});
+      analyticsTrack('ForgotPasswordLinkClicked', {});
     });
   }
 
   if (helpLink.length > 0) {
     helpLink.click(function () {
-      analytics.track('HelpLinkClicked', {});
+      analyticsTrack('HelpLinkClicked', {});
     });
   }
 
   if (registerButton.length > 0) {
     registerButton.click(function () {
-      analytics.track('RegisterButtonClicked', {
+      analyticsTrack('RegisterButtonClicked', {
         email: $('.o-form-input-name-email')
           .find('input')
           .val(),
@@ -235,7 +242,7 @@ function trackClicks() {
 
   if (resetViaEmail.length > 0) {
     resetViaEmail.click(function () {
-      analytics.track('ResetViaEmailClicked', {
+      analyticsTrack('ResetViaEmailClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
           .val(),
@@ -245,7 +252,7 @@ function trackClicks() {
 
   if (signInButton.length > 0) {
     signInButton.click(function () {
-      analytics.track('SignInButtonClicked', {
+      analyticsTrack('SignInButtonClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
           .val(),
@@ -255,13 +262,13 @@ function trackClicks() {
 
   if (unlockAccountLink.length > 0) {
     unlockAccountLink.click(function () {
-      analytics.track('UnlockAccountLinkClicked', {});
+      analyticsTrack('UnlockAccountLinkClicked', {});
     });
   }
 
   if (unlockSendEmail.length > 0) {
     unlockSendEmail.click(function () {
-      analytics.track('UnlockAccountSendEmailClicked', {
+      analyticsTrack('UnlockAccountSendEmailClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
           .val(),
@@ -271,5 +278,22 @@ function trackClicks() {
 }
 
 oktaSignInWidget.on('pageRendered', function () {
-  trackClicks();
+  // Wait for analytics to be defined before tracking clicks
+  if(window.analytics) {
+    utils.log('window.analytics found on pageRendered');
+    trackClicks();
+  } else {
+    utils.log('Wait for window.analytics to be defined');
+    Object.defineProperties(window, 'analytics', {
+      configurable: true,
+      get: function() {
+        return this._analytics;
+      },
+      set: function(val) {
+        utils.log('window.analytics defined, tracking clicks');
+        this._analytics = val;
+        trackClicks();
+      }
+    })
+  }
 });
