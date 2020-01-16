@@ -1,4 +1,5 @@
 {
+  "projectId": "g5abyp",
   "baseUrl": "https://int.crossroads.net",
   "testFiles": "**/*_*spec.*",
   "video": false,

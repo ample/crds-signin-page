@@ -6,7 +6,9 @@
         "OKTA_ENDPOINT",
         "TEST_PASSWORD_SCISSORHANDS",
         "TEST_PASSWORD_GOOSE",
-        "TEST_PASSWORD_BEE"
+        "TEST_PASSWORD_BEE",
+        "OKTA_API_SUBDOMAIN",
+        "OKTA_API_TESTING_TOKEN"
       ]
     }
   ]

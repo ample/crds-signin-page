@@ -1,3 +1,5 @@
+import { TestUser } from "../interfaces/TestUser";
+
 export class OktaEndpoint {
   /* If test is re-run in the same browser the Okta widget is able to find the user session and logs the user in,
    *   even if cookies and local storage is cleared. Call this function to force an open session to end before
@@ -13,13 +15,8 @@ export class OktaEndpoint {
     cy.request(endSessionRequest);
   }
 
-  /*
-  * Okta admins cannot set a user's state to "locked out" directly, so this attempts to authenticate a user
-  *    using an invalid password until the user is locked out.
-  * Note that a user account is automatically unlocked after some time has passed.
-  */
-  public static lockOutUser(username: string) {
-    const lockOutRequest = {
+  public static createAuthnRequest(username: string, password: string){
+    return {
       method: 'POST',
       url: `${Cypress.env('OKTA_ENDPOINT')}/api/v1/authn`,
       headers: {
@@ -27,10 +24,20 @@ export class OktaEndpoint {
       },
       body: {
         username,
-        password: '123'
+        password
       },
-      failOnStatusCode: false
+      failOnStatusCode: true
     };
+  }
+
+  /*
+  * Okta admins cannot set a user's state to "locked out" directly, so this attempts to authenticate a user
+  *    using an invalid password until the user is locked out.
+  * Note that a user account is automatically unlocked after some time has passed.
+  */
+  public static lockOutUser(username: string) {
+    const lockOutRequest = this.createAuthnRequest(username, '123');
+    lockOutRequest.failOnStatusCode = false;
 
     const makeRequest = (count: number) => {
       cy.request(lockOutRequest)

@@ -15,7 +15,7 @@ export const unverifiedEmailUser: TestUser = {
   password: Cypress.env('TEST_PASSWORD_BEE'),
   oktaId: '00up6wfgktqHxfuey0h7',
   mpContactId: '7834596'
-}
+};
 
 // Use for locked out testing
 //   Okta auto-unlocks after some time so account will need to be re-locked
@@ -24,4 +24,4 @@ export const lockedOutUser: TestUser = {
   password: Cypress.env('TEST_PASSWORD_SCISSORHANDS'),
   oktaId: '00up6x6so2dbTCayl0h7',
   mpContactId: '7834597'
-}
+};

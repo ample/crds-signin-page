@@ -35,4 +35,4 @@ services:
       - VAULT_SECRET_ID=$VAULT_SECRET_ID
     entrypoint: > #may not need /pre-deploy-integration/ part?
       /pre-deploy-integration/wait-for-it.sh signin-page:8000
-      -- npm run test_local
+      -- npx cypress run --browser chrome --record --key $CYP_DASHBOARD_RECORD_KEY --config-file ./cypress/config/localhost.json
