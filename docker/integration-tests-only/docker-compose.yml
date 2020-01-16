@@ -1,0 +1,12 @@
+version: '3'
+services:
+  integration_tests:
+    build:
+      context: ../../
+      dockerfile: ./docker/cypress/Dockerfile
+    container_name: signin-page_int-integration
+    image: crdschurch/crds-signin-page-int-integration:${DOCKER_TAG:-local}
+    environment:
+      - VAULT_ROLE_ID=$VAULT_ROLE_ID
+      - VAULT_SECRET_ID=$VAULT_SECRET_ID
+    entrypoint: npx cypress run --browser chrome --record --key $CYP_DASHBOARD_RECORD_KEY --config-file ./cypress/config/int_crossroads.json

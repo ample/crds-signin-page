@@ -12,18 +12,10 @@ describe('Sign in scenarios: user is locked out', () => {
     OktaEndpoint.endCurrentSession();
   });
 
-  // it('Verify locked out user gets locked out response when attempting to authenticate', () => {
-  //   const authnRequest = OktaEndpoint.createAuthnRequest(lockedOutUser.username, lockedOutUser.password);
-  //   cy.request(authnRequest).then((response) => {
-  //     expect(response).to.have.property('status', OK);
-  //     expect(response).to.have.deep.property('body.status', 'LOCKED_OUT');
-  //   });
-  // });
-
   it('Verify locked out UI workflow: Sign In page -> Unlock page -> Email Sent page -> Sign In page', () => {
     // Ignore known failures
     Cypress.on('uncaught:exception', (err, runnable) => {
-      if (err.message.includes('Property description must be an object: a')) {
+      if (err.message.includes('Property description must be an object')) {
         return false; // Known issue (probably from widget), do not fail
       }
       return true;
@@ -34,7 +26,7 @@ describe('Sign in scenarios: user is locked out', () => {
     cy.route('POST', '/api/v1/authn').as('authRequest');
     cy.route('POST', '/api/v1/authn/recovery/unlock').as('unlockRequest');
 
-    // Sign in page
+    // Sign in from sign in page
     cy.visit(Cypress.env('signinExtension'));
     fillAndSubmitSignInForm(lockedOutUser.username, lockedOutUser.password);
 

@@ -1,9 +1,9 @@
 version: '3'
 services:
-  signin-page:
+  docker-testing-service:
     build:
       context: ../../
-      dockerfile: ./docker/integration-tests-pre-deploy/signin-page/Dockerfile
+      dockerfile: ./docker/signin-page/Dockerfile
     container_name: signin_page
     image: crdschurch/crds-signin-page:${DOCKER_TAG:-local}
     environment:
@@ -19,20 +19,19 @@ services:
     - CONTENTFUL_ENV=$CONTENTFUL_ENV
     ports:
       - "8000:8000"
-    entrypoint: npm run start-for-windows
+    entrypoint: npm run start-no-env
   integration_tests:
     build:
       context: ../../
-      dockerfile: ./docker/integration-tests-pre-deploy/cypress/Dockerfile
-    container_name: cypress_signin-page_integration
-    image: crdschurch/crds-service-signin-page-integration:${DOCKER_TAG:-local}
+      dockerfile: ./docker/cypress/Dockerfile
+    container_name: signin-page_local-integration
+    image: crdschurch/crds-service-signin-page-local-integration:${DOCKER_TAG:-local}
     depends_on:
-      - signin-page
+      - docker-testing-service
     environment:
-      - CYPRESS_baseUrl=http://signin-page:8000 #This must be a fully qualified domain name
-      # - CYPRESS_vaultEnv=$CRDS_ENV
+      - CYPRESS_baseUrl=http://docker-testing-service:8000 #This must be a fully qualified domain name
       - VAULT_ROLE_ID=$VAULT_ROLE_ID
       - VAULT_SECRET_ID=$VAULT_SECRET_ID
-    entrypoint: > #may not need /pre-deploy-integration/ part?
-      /pre-deploy-integration/wait-for-it.sh signin-page:8000
-      -- npx cypress run --browser chrome --record --key $CYP_DASHBOARD_RECORD_KEY --config-file ./cypress/config/localhost.json
+    entrypoint: >
+      /sign-in-integration-tests/wait-for-it.sh docker-testing-service:8000
+      -- npx cypress run --browser chrome --record --key $CYP_DASHBOARD_RECORD_KEY --config-file ./cypress/config/dockerhost.json

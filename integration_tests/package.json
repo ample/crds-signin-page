@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test_int_open": "cypress open --config-file ./cypress/config/int_crossroads.json",
-    "test_local_open": "cypress open --config-file ./cypress/config/localhost.json",
-    "test_int": "cypress run --browser chrome --config-file ./cypress/config/int_crossroads.json",
-    "test_local": "cypress run --browser chrome --config-file ./cypress/config/localhost.json"
+    "run_ui_int": "cypress open --config-file ./cypress/config/int_crossroads.json",
+    "run_ui_localhost": "cypress open --config-file ./cypress/config/localhost.json",
+    "run_headless_int": "cypress run --browser chrome --config-file ./cypress/config/int_crossroads.json",
+    "run_headless_localhost": "cypress run --browser chrome --config-file ./cypress/config/localhost.json"
   },
   "keywords": [],
   "author": "",

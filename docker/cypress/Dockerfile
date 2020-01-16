@@ -1,7 +1,5 @@
-# FROM cypress/browsers:node13.3.0-chrome79-ff70
-# to control the node & chrome version
 FROM cypress/included:3.8.2
-WORKDIR /pre-deploy-integration
+WORKDIR /sign-in-integration-tests
 
 COPY ./integration_tests ./
 

@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "source .env && parcel index.html -p 8000",
-    "start-for-windows": "parcel index.html -p 8000",
-    "test-local-integration": "npm run test_local --prefix ./integration_tests/",
+    "start-no-env": "parcel index.html -p 8000",
     "test": "JASMINE_CONFIG_PATH=./jasmine.json jasmine",
     "build": "parcel build *.html",
     "build-for-netlify": "./netlify_build.sh",

@@ -5,9 +5,7 @@ import { authenticationFailedResponse } from '../../fixtures/okta_error_response
 import { signinUser, unverifiedEmailUser } from '../../fixtures/test_users';
 import { fillAndSubmitSignInForm } from './signin_form_helper';
 
-// TODO is the basename on docker literally being signin-page:8000 the problem? testing renaming the service to localhost - solves aborted xhr problems? couldn't get it to run. try whitelisting in Okta.
-// TODO dockerize for Team City - TODO fix up issues - connect to cypress dashboard and turn on video for debugging.
-// TODO verify copy from contentful
+// TODO dockerize for Team City
 // TODO readme for running tests
 // TODO look at unit tests
 
