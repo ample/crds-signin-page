@@ -7,6 +7,7 @@
   "env":{
     "signinExtension": "/",
     "homepage": "https://int.crossroads.net",
-    "vaultEnv": "int"
+    "vaultEnv": "int",
+    "reportConsoleLog": true
   }
 }

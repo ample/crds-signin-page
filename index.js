@@ -1,5 +1,5 @@
 var Utilities = require('./utilities');
-var debug = true;
+var debug = false;
 var utils = new Utilities(debug);
 const contentful = require("contentful");
 
@@ -35,7 +35,7 @@ function getOktaConfig() {
   var oktaRedirectUri = process.env.OKTA_REDIRECT_URI;
   // var oktaFacebookId = process.env.OKTA_FACEBOOK_CLIENT_ID;
   // var oktaGoogleId = process.env.OKTA_GOOGLE_CLIENT_ID;
-  utils.log(`DEBUG!!! getOktaConfig redirectUrl = ${oktaRedirectUri}`);
+
   return {
     features: {
       registration: true, // Enable self-service registration flow
@@ -182,7 +182,6 @@ function getContent() {
 }
 
 function analyticsTrack(eventName, payload){
-  console.log(`DEBUG!!!! trying to track analytics. Is analytics defined? ${window.analytics !== undefined}`); //TODO remove
   if(window.analytics !== undefined)
   {
     window.analytics.track(eventName, payload);

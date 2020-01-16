@@ -15,21 +15,6 @@ export class OktaEndpoint {
     cy.request(endSessionRequest);
   }
 
-  public static createAuthnRequest(username: string, password: string){
-    return {
-      method: 'POST',
-      url: `${Cypress.env('OKTA_ENDPOINT')}/api/v1/authn`,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: {
-        username,
-        password
-      },
-      failOnStatusCode: true
-    };
-  }
-
   /*
   * Okta admins cannot set a user's state to "locked out" directly, so this attempts to authenticate a user
   *    using an invalid password until the user is locked out.
@@ -53,5 +38,20 @@ export class OktaEndpoint {
 
     const countToLockout = 10;
     makeRequest(countToLockout);
+  }
+
+  private static createAuthnRequest(username: string, password: string){
+    return {
+      method: 'POST',
+      url: `${Cypress.env('OKTA_ENDPOINT')}/api/v1/authn`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        username,
+        password
+      },
+      failOnStatusCode: true
+    };
   }
 }

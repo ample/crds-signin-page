@@ -1,6 +1,0 @@
-needed for Cypress:
-VAULT_ROLE_ID
-VAULT_SECRET_ID
-CYP_DASHBOARD_RECORD_KEY
-
-DOCKER_TAG(optional)

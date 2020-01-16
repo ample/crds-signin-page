@@ -21,7 +21,12 @@ function checkEnvironmentVariables(){
 
 module.exports = (on, config) => {
   on('file:preprocessor', cypressTypeScriptPreprocessor);
-  require('cypress-log-to-output').install(on);
+
+
+  const reportConsoleLog = config.env.reportConsoleLog || false
+  if(reportConsoleLog){
+    require('cypress-log-to-output').install(on);
+  }
 
   checkEnvironmentVariables();
 
