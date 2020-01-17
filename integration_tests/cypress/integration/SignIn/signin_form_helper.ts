@@ -4,4 +4,4 @@ export function fillAndSubmitSignInForm(username: string, password: string) {
     cy.get('#okta-signin-password').type(password, { log: false });
     cy.get('#okta-signin-submit').click();
   });
-};
+}

@@ -13,10 +13,13 @@ describe('Sign in scenarios: user is locked out', () => {
   });
 
   it('Verify locked out UI workflow: Sign In page -> Unlock page -> Email Sent page -> Sign In page', () => {
-    // Ignore known failures
+    /* Ignore known failures
+    * -"Uncaught TypeError: Property description must be an object: a"
+    *    This seems to be related to the Shared Header.
+    */
     Cypress.on('uncaught:exception', (err, runnable) => {
       if (err.message.includes('Property description must be an object')) {
-        return false; // Known issue (probably from widget), do not fail
+        return false; // Do not fail
       }
       return true;
     });

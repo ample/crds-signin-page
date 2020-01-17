@@ -6,11 +6,11 @@
   "scripts": {
     "run_ui_int": "cypress open --config-file ./cypress/config/int_crossroads.json",
     "run_ui_localhost": "cypress open --config-file ./cypress/config/localhost.json",
-    "run_headless_int": "cypress run --browser chrome --config-file ./cypress/config/int_crossroads.json",
-    "run_headless_localhost": "cypress run --browser chrome --config-file ./cypress/config/localhost.json"
+    "run_headless_int": "cypress run --browser chrome --env reportConsoleLog=true --config-file ./cypress/config/int_crossroads.json",
+    "run_headless_localhost": "cypress run --browser chrome --env reportConsoleLog=true --config-file ./cypress/config/localhost.json"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sarah Henney",
   "license": "ISC",
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.1.1",

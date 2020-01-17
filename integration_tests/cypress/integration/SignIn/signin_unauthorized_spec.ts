@@ -5,11 +5,6 @@ import { authenticationFailedResponse } from '../../fixtures/okta_error_response
 import { signinUser, unverifiedEmailUser } from '../../fixtures/test_users';
 import { fillAndSubmitSignInForm } from './signin_form_helper';
 
-// tslint:disable-next-line: max-line-length
-// TODO a issue in locked out may be related to the shared footer loading (on int/oktasignin type "a" in console - it should be defined)
-// TODO wait module? https://docs.cypress.io/guides/guides/continuous-integration.html#Boot-your-server
-// TODO readme for running tests
-
 describe('Sign in scenarios: user is not authorized to sign in', () => {
   before(() => {
     OktaAPI.unlockUser(signinUser.oktaId); // TODO check if unlocked before unlocking
