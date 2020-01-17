@@ -61,7 +61,7 @@
 [context.development.environment] # 'development' is a branch name
   CONTENTFUL_ENV = "int"
   
-  OKTA_BASE_URL = "https://crossroads.oktapreview.com"
+  OKTA_BASE_URL = "https://authpreview.crossroads.net/"
   OKTA_REDIRECT_URI = "https://int.crossroads.net/oktasignin"
   # OKTA_FACEBOOK_CLIENT_ID = ""
   # OKTA_GOOGLE_CLIENT_ID = ""
@@ -75,7 +75,7 @@
 [context.branch-deploy.environment]
   CONTENTFUL_ENV = "int"
   
-  OKTA_BASE_URL = "https://crossroads.oktapreview.com"
+  OKTA_BASE_URL = "https://authpreview.crossroads.net/"
   OKTA_REDIRECT_URI = "https://int.crossroads.net/oktasignin"
   # OKTA_FACEBOOK_CLIENT_ID = ""
   # OKTA_GOOGLE_CLIENT_ID = ""
@@ -89,7 +89,7 @@
 [context.deploy-preview.environment]
   CONTENTFUL_ENV = "int"
   
-  OKTA_BASE_URL = "https://crossroads.oktapreview.com"
+  OKTA_BASE_URL = "https://authpreview.crossroads.net/"
   OKTA_REDIRECT_URI = "https://int.crossroads.net/oktasignin"
   # OKTA_FACEBOOK_CLIENT_ID = ""
   # OKTA_GOOGLE_CLIENT_ID = ""
