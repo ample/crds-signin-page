@@ -1,3 +1,4 @@
+import { OktaAPI } from '../../APIs/OktaAPI';
 import { OktaEndpoint } from '../../APIs/OktaEndpoint';
 import { signinUser } from '../../fixtures/test_users';
 import { fillAndSubmitSignInForm } from './signin_form_helper';
