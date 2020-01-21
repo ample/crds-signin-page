@@ -13,6 +13,10 @@ function verifyOktaTokenStored() {
   *   redirect to a different superdomain after a successful signin and the tests will fail.
   */
 describe('Sign in scenarios: user is redirected after successful sign in', () => {
+  before(() => {
+    OktaAPI.unlockUser(signinUser.oktaId); // TODO check if unlocked before unlocking
+  });
+  
   beforeEach(() => {
     OktaEndpoint.endCurrentSession();
 
