@@ -1,0 +1,30 @@
+{
+  "name": "integration_tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run_ui_int": "cypress open --config-file ./cypress/config/int_crossroads.json",
+    "run_ui_localhost": "cypress open --config-file ./cypress/config/localhost.json",
+    "run_headless_int": "cypress run --browser chrome --env reportConsoleLog=true --config-file ./cypress/config/int_crossroads.json",
+    "run_headless_localhost": "cypress run --browser chrome --env reportConsoleLog=true --config-file ./cypress/config/localhost.json"
+  },
+  "keywords": [],
+  "author": "Sarah Henney",
+  "license": "ISC",
+  "devDependencies": {
+    "@cypress/webpack-preprocessor": "^4.1.1",
+    "@types/node": "^13.1.6",
+    "crds-cypress-config": "^1.0.0",
+    "cypress": "^3.8.2",
+    "cypress-log-to-output": "^1.0.7",
+    "http-status-codes": "^1.4.0",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.20.1",
+    "tslint-no-unused-expression-chai": "^0.1.4",
+    "tslint-plugin-cypress": "^1.0.4",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5"
+  },
+  "dependencies": {}
+}

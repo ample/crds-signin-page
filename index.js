@@ -13,6 +13,7 @@ var oktaSignInWidget = new OktaSignIn(oktaSignInConfig);
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ENV = process.env.CONTENTFUL_ENV;
+const CRDS_APP_ENDPOINT = process.env.CRDS_APP_ENDPOINT;
 
 import './application.scss';
 
@@ -20,7 +21,7 @@ init();
 
 function init() {
   getContent();
-  //Handle redirect back to this page:
+    //Handle redirect back to this page:
   if (oktaSignInWidget.token.hasTokensInUrl()) {
     setTokensFromUrlAndRedirect();
   } else {
@@ -122,11 +123,10 @@ function isAccountActivation() {
 }
 
 function setRedirectUrl() {
-  var redirect_url = utils.getUrlParam('redirect_url');
-  if (redirect_url) {
-    utils.setCookie('redirect_url', redirect_url, 1);
+  var redirectUrl = utils.getUrlParam('redirectUrl');
+  if (redirectUrl) {
+    utils.setCookie('redirectUrl', redirectUrl, 1);
   }
-
   window.history.replaceState(null, null, window.location.pathname);
 }
 
@@ -151,14 +151,13 @@ function addTokensToManager(res) {
 }
 
 function redirectToOriginUrl() {
-  var redirect_url = utils.getCookie('redirect_url');
-  utils.deleteCookie('redirect_url');
+  var redirectUrl = utils.getCookie('redirectUrl');
 
-  if (redirect_url) {
-    window.location.replace(redirect_url);
+  if (redirectUrl) {
+    window.location.replace(redirectUrl);
   } else {
     //Send them to the homepage
-    window.location.replace('https://www.crossroads.net');
+    window.location.replace(CRDS_APP_ENDPOINT);
   }
 }
 
@@ -179,9 +178,15 @@ function getContent() {
     .then(entries => {
       document.getElementById("signin-content").innerHTML = entries.items[0].fields.content;
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 }
 
+function analyticsTrack(eventName, payload){
+  if(window.analytics !== undefined)
+  {
+    window.analytics.track(eventName, payload);
+  }
+}
 
 function trackClicks() {
   const createAccountLink = $('.registration-link');
@@ -196,31 +201,31 @@ function trackClicks() {
 
   if (createAccountLink.length > 0) {
     createAccountLink.click(function () {
-      analytics.track('CreateAccountLinkClicked', {});
+      analyticsTrack('CreateAccountLinkClicked', {});
     });
   }
 
   if (facebookButton.length > 0) {
     facebookButton.click(function () {
-      analytics.track('SignInFacebookButtonClicked', {});
+      analyticsTrack('SignInFacebookButtonClicked', {});
     });
   }
 
   if (forgotPasswordLink.length > 0) {
     forgotPasswordLink.click(function () {
-      analytics.track('ForgotPasswordLinkClicked', {});
+      analyticsTrack('ForgotPasswordLinkClicked', {});
     });
   }
 
   if (helpLink.length > 0) {
     helpLink.click(function () {
-      analytics.track('HelpLinkClicked', {});
+      analyticsTrack('HelpLinkClicked', {});
     });
   }
 
   if (registerButton.length > 0) {
     registerButton.click(function () {
-      analytics.track('RegisterButtonClicked', {
+      analyticsTrack('RegisterButtonClicked', {
         email: $('.o-form-input-name-email')
           .find('input')
           .val(),
@@ -236,7 +241,7 @@ function trackClicks() {
 
   if (resetViaEmail.length > 0) {
     resetViaEmail.click(function () {
-      analytics.track('ResetViaEmailClicked', {
+      analyticsTrack('ResetViaEmailClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
           .val(),
@@ -246,7 +251,7 @@ function trackClicks() {
 
   if (signInButton.length > 0) {
     signInButton.click(function () {
-      analytics.track('SignInButtonClicked', {
+      analyticsTrack('SignInButtonClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
           .val(),
@@ -256,13 +261,13 @@ function trackClicks() {
 
   if (unlockAccountLink.length > 0) {
     unlockAccountLink.click(function () {
-      analytics.track('UnlockAccountLinkClicked', {});
+      analyticsTrack('UnlockAccountLinkClicked', {});
     });
   }
 
   if (unlockSendEmail.length > 0) {
     unlockSendEmail.click(function () {
-      analytics.track('UnlockAccountSendEmailClicked', {
+      analyticsTrack('UnlockAccountSendEmailClicked', {
         email: $('.o-form-input-name-username')
           .find('input')
           .val(),
@@ -272,5 +277,22 @@ function trackClicks() {
 }
 
 oktaSignInWidget.on('pageRendered', function () {
-  trackClicks();
+  // Wait for analytics to be defined before tracking clicks
+  if(window.analytics) {
+    utils.log('window.analytics found on pageRendered');
+    trackClicks();
+  } else {
+    utils.log('Wait for window.analytics to be defined');
+    Object.defineProperties(window, 'analytics', {
+      configurable: true,
+      get: function() {
+        return this._analytics;
+      },
+      set: function(val) {
+        utils.log('window.analytics defined, tracking clicks');
+        this._analytics = val;
+        trackClicks();
+      }
+    })
+  }
 });

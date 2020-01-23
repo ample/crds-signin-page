@@ -1,0 +1,37 @@
+version: '3'
+services:
+  docker-testing-service:
+    build:
+      context: ../../
+      dockerfile: ./docker/signin-page/Dockerfile
+    container_name: signin_page
+    image: crdschurch/crds-signin-page:${DOCKER_TAG:-local}
+    environment:
+    - OKTA_BASE_URL=$OKTA_BASE_URL
+    - OKTA_CLIENT_ID=$OKTA_CLIENT_ID
+    - OKTA_REDIRECT_URI=$OKTA_REDIRECT_URI
+    - CRDS_APP_ENDPOINT=$CRDS_APP_ENDPOINT
+    - CRDS_GATEWAY_ENDPOINT=$CRDS_GATEWAY_ENDPOINT
+    - CRDS_COOKIE_PREFIX=$CRDS_COOKIE_PREFIX
+    - CRDS_CMS_ENDPOINT=$CRDS_CMS_ENDPOINT
+    - CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN
+    - CONTENTFUL_SPACE_ID=$CONTENTFUL_SPACE_ID
+    - CONTENTFUL_ENV=$CONTENTFUL_ENV
+    ports:
+      - "8000:8000"
+    entrypoint: npm run start-no-env
+  integration_tests:
+    build:
+      context: ../../
+      dockerfile: ./docker/cypress/Dockerfile
+    container_name: signin-page_local-integration
+    image: crdschurch/crds-service-signin-page-local-integration:${DOCKER_TAG:-local}
+    depends_on:
+      - docker-testing-service
+    environment:
+      - CYPRESS_baseUrl=http://docker-testing-service:8000 #This must be a fully qualified domain name
+      - VAULT_ROLE_ID=$VAULT_ROLE_ID
+      - VAULT_SECRET_ID=$VAULT_SECRET_ID
+    entrypoint: >
+      /sign-in-integration-tests/wait-for-it.sh docker-testing-service:8000
+      -- npx cypress run --browser chrome --record --key $CYP_DASHBOARD_RECORD_KEY --config-file ./cypress/config/dockerhost.json
