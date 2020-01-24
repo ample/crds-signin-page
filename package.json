@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "source .env && parcel index.html -p 8000",
-    "start-no-env": "parcel index.html -p 8000",
+    "start-no-env": "parcel index.html -p 8000 --public-url /oktasignin",
     "test": "JASMINE_CONFIG_PATH=./jasmine.json jasmine",
     "build": "parcel build *.html",
     "build-for-netlify": "./netlify_build.sh",
