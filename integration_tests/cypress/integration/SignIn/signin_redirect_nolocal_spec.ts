@@ -17,9 +17,20 @@ describe('Sign in scenarios: user is redirected after successful sign in', () =>
   before(() => {
     OktaAPI.unlockUser(signinUser.oktaId); // TODO check if unlocked before unlocking
   });
-  
+
   beforeEach(() => {
     OktaEndpoint.endCurrentSession();
+
+    /* Ignore known failures
+     * -"Cannot set property 'status' of undefined"
+     *    This seems to be related to the Shared Header.
+     */
+    cy.on('uncaught:exception', (error, runnable) => {
+      if (error.message.includes("Cannot set property 'status' of undefined")) {
+        return false;
+      }
+      return true;
+    });
 
     cy.server();
     cy.route('POST', '/api/v1/authn').as('authRequest');

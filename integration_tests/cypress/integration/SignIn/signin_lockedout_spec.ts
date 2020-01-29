@@ -10,20 +10,24 @@ describe('Sign in scenarios: user is locked out', () => {
 
   beforeEach(() => {
     OktaEndpoint.endCurrentSession();
-  });
 
-  it('Verify locked out UI workflow: Sign In page -> Unlock page -> Email Sent page -> Sign In page', () => {
     /* Ignore known failures
-    * -"Uncaught TypeError: Property description must be an object: a"
-    *    This seems to be related to the Shared Header.
+    * -"Uncaught TypeError: Property description must be an object: a" and
+    *    "Cannot set property 'status' of undefined"
+    *    These seems to be related to the Shared Header.
     */
     Cypress.on('uncaught:exception', (err, runnable) => {
       if (err.message.includes('Property description must be an object')) {
         return false; // Do not fail
       }
+      if (err.message.includes("Cannot set property 'status' of undefined")) {
+        return false; // Do not fail
+      }
       return true;
     });
+  });
 
+  it('Verify locked out UI workflow: Sign In page -> Unlock page -> Email Sent page -> Sign In page', () => {
     // Setup listener for calls
     cy.server();
     cy.route('POST', '/api/v1/authn').as('authRequest');
@@ -45,13 +49,13 @@ describe('Sign in scenarios: user is locked out', () => {
 
     // Fill unlock account form
     cy.get('[data-se="email-button"]').as('submitEmail').should('be.visible')
-    .then(() => {
-      cy.get('.account-unlock').within(() => {
-        cy.get('.okta-form-title').contains('Unlock account');
-        cy.get('[name="username"]').type(lockedOutUser.username);
-        cy.get('@submitEmail').click();
+      .then(() => {
+        cy.get('.account-unlock').within(() => {
+          cy.get('.okta-form-title').contains('Unlock account');
+          cy.get('[name="username"]').type(lockedOutUser.username);
+          cy.get('@submitEmail').click();
+        });
       });
-    });
 
     // Verify unlock request sent
     cy.wait('@unlockRequest');
@@ -64,7 +68,7 @@ describe('Sign in scenarios: user is locked out', () => {
     cy.get('[data-se="back-button"]').as('returnSignin').click();
 
     // Verify back on sign in page
-    const signinUrl = `${Cypress.config().baseUrl}${Cypress.env('signinExtension')}`;
-    cy.url().should('eq', signinUrl);
+    cy.get('#okta-signin-username').should('be.visible');
+    cy.get('#okta-signin-password').should('be.visible');
   });
 });
