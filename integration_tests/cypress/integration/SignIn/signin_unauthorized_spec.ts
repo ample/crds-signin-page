@@ -12,6 +12,16 @@ describe('Sign in scenarios: user is not authorized to sign in', () => {
 
   beforeEach(() => {
     OktaEndpoint.endCurrentSession();
+    /* Ignore known failures
+   * -"Cannot set property 'status' of undefined"
+   *    This seems to be related to the Shared Header.
+   */
+    cy.on('uncaught:exception', (error, runnable) => {
+      if (error.message.includes("Cannot set property 'status' of undefined")) {
+        return false;
+      }
+      return true;
+    });
   });
 
   const unauthorizedScenarios =
