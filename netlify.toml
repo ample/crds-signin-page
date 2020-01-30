@@ -44,7 +44,7 @@
 # these settings.
 
 [context.release]
-[context.release.environment] # 'development' is a branch name
+[context.release.environment] # 'release' is a branch name
   CONTENTFUL_ENV = "demo"
 
   OKTA_BASE_URL = "https://authpreview.crossroads.net"
@@ -85,6 +85,8 @@
   CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
 
+  TEAMCITY_TEST_BUILD = "WebApps_SignInPage_2Development"
+
 [context.deploy-preview]
 [context.deploy-preview.environment]
   CONTENTFUL_ENV = "int"
@@ -98,6 +100,8 @@
   CRDS_GATEWAY_ENDPOINT = "https://gatewayint.crossroads.net/gateway/api/image/profile/"
   CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
+
+  TEAMCITY_TEST_BUILD = "WebApps_SignInPage_2Development" # TODO remove this, only for testing - only want to run these on branch deploys for now
 
 [[headers]]
   for = "/*.woff"

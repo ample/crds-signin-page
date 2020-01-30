@@ -8,7 +8,7 @@
     "start-no-env": "parcel index.html -p 8000",
     "test": "JASMINE_CONFIG_PATH=./jasmine.json jasmine",
     "build": "parcel build *.html",
-    "build-for-netlify": "./netlify_build.sh",
+    "build-for-netlify": "./netlify_build.sh && ./teamcity_run_tests.sh",
     "lint.stylesheets": "./node_modules/.bin/stylelint --config stylelint.config.js '**/*.scss' --fix"
   },
   "repository": {
