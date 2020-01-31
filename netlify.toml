@@ -101,6 +101,8 @@
   CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
 
+  RUN_CYPRESS = "true"
+
 [[headers]]
   for = "/*.woff"
   [headers.values]
