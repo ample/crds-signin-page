@@ -40,8 +40,9 @@ describe('Sign in scenarios: user is redirected after successful sign in', () =>
       When this is fixed replace the code between these comments with:
       cy.server();
     */
-    cy.server({force404: true});
-    cy.route('/browsers.json');
+    cy.server(); // TODO
+    // cy.server({force404: true});
+    // cy.route('/browsers.json');
     /* End docker hanging workaround */
 
     cy.route('POST', '/api/v1/authn').as('authRequest');

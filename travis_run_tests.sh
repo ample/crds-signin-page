@@ -1,9 +1,6 @@
 #!/bin/bash
-# TODO reconfigure for signin page
 shopt -s nocasematch; #ignore case
 
-#Skip all testing against preview branches
-# if [ "$CONTEXT" != "production" ];
 if [ "${RUN_CYPRESS}" != "true" ];
 then
     exit 0
