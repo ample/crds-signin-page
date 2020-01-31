@@ -19,14 +19,12 @@ install:
 # Integration Test stage
 integrationTests: &integrationTest
   if: env(RUN_CYPRESS) = true
-  script: "npx cypress run --record --key $cypressDashboard --parallel --group crds-signin-page-parallel --browser chrome --config video=true --env reportConsoleLog=true --config-file ./cypress/config/int_crossroads.json"
+  script: "npx cypress run --record --key $cypressDashboard --browser chrome --config video=true --env reportConsoleLog=true --config-file ./cypress/config/int_crossroads.json"
 
 jobs:
   include:
   # run tests in parallel by including several jobs with same "stage" name
-    - stage: Integraion Tests
-      <<: *integrationTest
-    - stage: Integraion Tests
+    - stage: Integration Tests
       <<: *integrationTest
 
 notifications:
