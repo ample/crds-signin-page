@@ -101,8 +101,6 @@
   CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
 
-  RUN_CYPRESS = "true" # This isn't testing a new version of the signin widgit, so it can be removed
-
 [[headers]]
   for = "/*.woff"
   [headers.values]
