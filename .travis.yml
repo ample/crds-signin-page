@@ -16,8 +16,9 @@ before_install:
 install:
     - npm ci
 
-# Integration Test stage -- add   if: env(RUN_CYPRESS) = true
+# Integration Test stage
 integrationTests: &integrationTest
+  if: env(RUN_CYPRESS) = true
   script: "npx cypress run --record --key $cypressDashboard --parallel --group crds-signin-page-parallel --browser chrome --config video=true --env reportConsoleLog=true --config-file ./cypress/config/int_crossroads.json"
 
 jobs:
