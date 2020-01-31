@@ -85,7 +85,7 @@
   CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
 
-  TEAMCITY_TEST_BUILD = "WebApps_SignInPage_2Development"
+  # TEAMCITY_TEST_BUILD = "WebApps_SignInPage_2Development"
   # RUN_CYPRESS = "true"
 
 [context.deploy-preview]
@@ -102,7 +102,7 @@
   CRDS_APP_ENDPOINT = "https://int.crossroads.net/"
   CRDS_CMS_ENDPOINT = "https://contentint.crossroads.net/"
 
-  TEAMCITY_TEST_BUILD = "WebApps_SignInPage_2Development" # TODO remove this, only for testing - only want to run these on branch deploys for now
+  # TEAMCITY_TEST_BUILD = "WebApps_SignInPage_2Development" # TODO remove this, only for testing - only want to run these on branch deploys for now
   # RUN_CYPRESS = "true"
 
 [[headers]]
