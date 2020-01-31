@@ -9,4 +9,4 @@ services:
     environment:
       - VAULT_ROLE_ID=$VAULT_ROLE_ID
       - VAULT_SECRET_ID=$VAULT_SECRET_ID
-    entrypoint: npx cypress run --record --key $CYP_DASHBOARD_RECORD_KEY --config video=true --env reportConsoleLog=true --config-file ./cypress/config/int_crossroads.json
+    entrypoint: npx cypress run --browser chrome --record --key $CYP_DASHBOARD_RECORD_KEY --config video=true --env reportConsoleLog=true --config-file ./cypress/config/int_crossroads.json

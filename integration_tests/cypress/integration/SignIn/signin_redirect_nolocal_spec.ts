@@ -35,20 +35,11 @@ describe('Sign in scenarios: user is redirected after successful sign in', () =>
       return true;
     });
 
-    /* Docker hanging workaround
-      Something loading on the homepage causes Cypress to hang when run on Docker.
-      When this is fixed replace the code between these comments with:
-      cy.server();
-    */
-    cy.server(); // TODO
-    // cy.server({force404: true});
-    // cy.route('/browsers.json');
-    /* End docker hanging workaround */
-
+    cy.server();
     cy.route('POST', '/api/v1/authn').as('authRequest');
   });
 
-  it.only('Verify UI workflow for successful sign and redirect: Sign In page -> Redirected to homepage', () => {
+  it('Verify UI workflow for successful sign and redirect: Sign In page -> Redirected to homepage', () => {
     // Sign in
     cy.visit(Cypress.env('signinExtension'));
     fillAndSubmitSignInForm(signinUser.username, signinUser.password);
