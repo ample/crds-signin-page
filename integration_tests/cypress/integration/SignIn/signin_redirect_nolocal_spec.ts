@@ -29,6 +29,9 @@ describe('Sign in scenarios: user is redirected after successful sign in', () =>
       if (error.message.includes("Cannot set property 'status' of undefined")) {
         return false;
       }
+      if (error.message.includes("Cannot read property 'pause' of undefined")) {
+        return false;
+      }
       return true;
     });
 
