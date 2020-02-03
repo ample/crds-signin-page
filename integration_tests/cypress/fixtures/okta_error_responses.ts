@@ -9,3 +9,20 @@ export const authenticationFailedResponse = (): OktaErrorResponse => {
     errorCauses: []
   };
 };
+
+export const registrationFailureEmailExistsResponse = (): OktaErrorResponse => {
+  return {
+    errorCode: 'E0000001',
+    errorSummary: 'Api validation failed: null',
+    errorLink: 'E0000001',
+    errorId: '',
+    errorCauses: [
+      {
+        errorSummary: 'A user with this Email already exists',
+        reason: 'UNIQUE_CONSTRAINT',
+        locationType: 'body',
+        domain: 'registration request'
+      }
+    ]
+  };
+};

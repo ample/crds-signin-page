@@ -25,3 +25,18 @@ export const lockedOutUser: TestUser = {
   oktaId: '00up6x6so2dbTCayl0h7',
   mpContactId: '7834597'
 };
+
+/* Use for registration tests */
+// This user will be deleted then recreated by tests
+export const newUser: TestUser = {
+  username: 'mpcrds+auto+signin-page+curious_george@gmail.com', // TODO create this user
+  password: Cypress.env('TODO'),
+  oktaId: ''
+};
+
+export const mpOnlyUser: TestUser = {
+  username: 'mpcrds+auto+signin-page+old_mcdonald@gmail.com', // TODO create this user
+  password: Cypress.env('TODO'),
+  oktaId: '',
+  mpContactId: 'TODO'
+};
