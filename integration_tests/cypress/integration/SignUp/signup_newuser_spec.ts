@@ -77,7 +77,9 @@ describe('Sign Up scenario: New user can register for Crossroads account', () =>
     cy.url().should('eq', emailSentUrl);
 
     // Click return link
-    cy.get('[data-se="back-link"]').as('returnSignin').click();
+    cy.get('.registration-complete').within(() => {
+      cy.get('[data-se="back-link"]').as('returnSignin').click();
+    });
 
     // Verify back on sign in page
     cy.get('#okta-signin-username').should('be.visible');

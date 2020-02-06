@@ -12,7 +12,6 @@ describe('Sign Up scenario: User must sign up with unique email', () => {
     *    "Cannot set property 'status' of undefined"
     *    These seems to be related to the Shared Header.
     */
-    // TODO are these still necessary?
     Cypress.on('uncaught:exception', (err, runnable) => {
       if (err.message.includes('Property description must be an object')) {
         return false; // Do not fail

@@ -1,4 +1,3 @@
-import { NOTFOUND } from 'dns';
 import { NOT_FOUND } from 'http-status-codes';
 
 export class OktaAPI {
