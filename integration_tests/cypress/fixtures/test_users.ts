@@ -27,16 +27,11 @@ export const lockedOutUser: TestUser = {
 };
 
 /* Use for registration tests */
-// This user will be deleted then recreated by tests
-export const newUser: TestUser = {
-  username: 'mpcrds+auto+signin-page+curious_george@gmail.com', // TODO create this user
-  password: Cypress.env('TODO'),
-  oktaId: ''
-};
-
+// This user will be deleted from Okta then recreated by tests
 export const mpOnlyUser: TestUser = {
   username: 'mpcrds+auto+signin-page+old_mcdonald@gmail.com', // TODO create this user
-  password: Cypress.env('TODO'),
+  // username: 'mpcrds+auto+deleteTest@gmail.com',
+  password: Cypress.env('TEST_PASSWORD_MCDONALD'), //TODO vault this value
   oktaId: '',
-  mpContactId: 'TODO'
+  mpContactId: '7838915' // TODO change once user created --TODO how manage after TD/RL?
 };

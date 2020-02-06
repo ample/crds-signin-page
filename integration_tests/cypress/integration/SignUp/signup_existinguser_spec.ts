@@ -29,7 +29,7 @@ describe('Sign Up scenario: User must sign up with unique email', () => {
     cy.route('POST', '/api/v1/registration/*/register').as('registerRequest');
 
     // Submit registration form
-    cy.visit(`${Cypress.env('signinExtension')}/signin/register`);
+    cy.visit('/signin/register');
     cy.get('.registration').within(() => {
       cy.get('input[name="email"]').type(signinUser.username);
       cy.get('input[name="password"]').type(signinUser.password, { log: false });

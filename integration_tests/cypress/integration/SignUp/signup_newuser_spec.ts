@@ -1,22 +1,31 @@
 import { OK } from 'http-status-codes';
 import { OktaAPI } from '../../APIs/OktaAPI';
 import { OktaEndpoint } from '../../APIs/OktaEndpoint';
-import { newUser } from '../../fixtures/test_users';
+import { TestUser } from '../../interfaces/TestUser';
+const uuid = require('uuid/v4');
 
-// - New user signs up (email does not exist in Okta or MP) - verify post-signup form screen displayed, verify Okta account created with Pending User Action status.
-
-// TODO - probs need to add a "delete test user" endpoint to Identity - lock it down to users in Test group so can't be misused
+function generateTemporaryTestUser(): TestUser {
+  const uniqueID = uuid();
+  const tempEmail = `mpcrds+auto+temp+signin-page+${uniqueID}@gmail.com`;
+  const tempUser: TestUser = {
+    username: tempEmail,
+    password: Cypress.env('TEST_PASSWORD_TEMP'),
+    oktaId: ''
+  };
+  return tempUser;
+}
 
 describe('Sign Up scenario: New user can register for Crossroads account', () => {
+  let newUser: TestUser;
+
   beforeEach(() => {
     OktaEndpoint.endCurrentSession();
-
+    newUser = generateTemporaryTestUser();
     /* Ignore known failures
     * -"Uncaught TypeError: Property description must be an object: a" and
     *    "Cannot set property 'status' of undefined"
     *    These seems to be related to the Shared Header.
     */
-    // TODO are these still necessary?
     Cypress.on('uncaught:exception', (err, runnable) => {
       if (err.message.includes('Property description must be an object')) {
         return false; // Do not fail
@@ -28,14 +37,15 @@ describe('Sign Up scenario: New user can register for Crossroads account', () =>
     });
   });
 
-  it('Verify new user has Okta and MP account after completing Sign Up workflow', () => {
-    // pre: delete user from Okta and MP - fail if not successful
-    // TODO ^
+  afterEach(() => {
+    OktaAPI.deleteUser(newUser.username);
+  });
 
+  it('Verify new user has Okta and MP account after completing Sign Up workflow', () => {
     cy.server();
     cy.route('POST', '/api/v1/registration/*/register').as('registerRequest');
 
-    // Navigate to registration page
+    // Navigate to registration page through link
     cy.visit(Cypress.env('signinExtension'));
     cy.get('.primary-auth').within(() => {
       cy.get('.registration-link').click();
@@ -53,20 +63,24 @@ describe('Sign Up scenario: New user can register for Crossroads account', () =>
     // Verify response
     cy.wait('@registerRequest').then((response) => {
       expect(response).to.have.property('status', OK);
-      // TODO more details?
-      // expect(response).to.have.deep.property('response.body.errorCauses[0]')
-      //   .and.equal(registrationFailureEmailExistsResponse().errorCauses[0]);
     });
-
-    // Verify on email sent page
-    // TODO
 
     // Verify Okta user created, has pending email status and MP contact ID linked
     OktaAPI.getUser(newUser.username).then((response) => {
       expect(response).to.have.property('status', OK);
-      expect(response).to.have.deep.property('response.body.status', 'PROVISIONED');
-      // TODO this may not be accurate
-      expect(response).to.have.deep.property('response.body.profile.mpContactID').to.not.be.empty;
+      expect(response).to.have.deep.property('body.status', 'PROVISIONED');
+      expect(response).to.have.deep.property('body.profile.mpContactID').to.not.be.empty;
     });
+
+    // Verify on email sent page
+    const emailSentUrl = `${Cypress.config().baseUrl}/signin/register-complete`;
+    cy.url().should('eq', emailSentUrl);
+
+    // Click return link
+    cy.get('[data-se="back-link"]').as('returnSignin').click();
+
+    // Verify back on sign in page
+    cy.get('#okta-signin-username').should('be.visible');
+    cy.get('#okta-signin-password').should('be.visible');
   });
 });
