@@ -1,4 +1,4 @@
-FROM cypress/included:3.8.2
+FROM cypress/included:4.0.1
 WORKDIR /sign-in-integration-tests
 
 COPY ./integration_tests ./
