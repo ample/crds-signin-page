@@ -16,14 +16,15 @@
     "@cypress/webpack-preprocessor": "^4.1.1",
     "@types/node": "^13.1.6",
     "crds-cypress-config": "^1.0.0",
-    "cypress": "^3.8.2",
-    "cypress-log-to-output": "^1.0.7",
+    "cypress": "^4.0.1",
+    "cypress-log-to-output": "^1.0.8",
     "http-status-codes": "^1.4.0",
     "ts-loader": "^6.2.1",
     "tslint": "^5.20.1",
     "tslint-no-unused-expression-chai": "^0.1.4",
     "tslint-plugin-cypress": "^1.0.4",
     "typescript": "^3.7.4",
+    "uuid": "^3.4.0",
     "webpack": "^4.41.5"
   },
   "dependencies": {}

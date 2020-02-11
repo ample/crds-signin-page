@@ -25,3 +25,12 @@ export const lockedOutUser: TestUser = {
   oktaId: '00up6x6so2dbTCayl0h7',
   mpContactId: '7834597'
 };
+
+/* Use for registration tests */
+// This user will be deleted from Okta then recreated by tests
+export const mpOnlyUser: TestUser = {
+  username: 'mpcrds+auto+signin-page+old_mcdonald@gmail.com',
+  password: Cypress.env('TEST_PASSWORD_MCDONALD'),
+  oktaId: '',
+  mpContactId: '7838915'
+};

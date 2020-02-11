@@ -3,5 +3,12 @@ export interface OktaErrorResponse {
   errorSummary?: string;
   errorLink?: string;
   errorId?: string;
-  errorCauses: [];
+  errorCauses: OktaErrorCauses[];
+}
+
+export interface OktaErrorCauses {
+  errorSummary: string;
+  reason: string;
+  locationType: string;
+  domain: string;
 }
