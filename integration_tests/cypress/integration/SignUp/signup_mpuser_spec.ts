@@ -46,8 +46,8 @@ describe('Sign Up scenario: Existing user with MP account only can register for 
     // Verify Okta user created, has pending email status and linked to existing MP contact ID
     OktaAPI.getUser(mpOnlyUser.username).then((response) => {
       expect(response).to.have.property('status', OK);
-      expect(response).to.have.deep.property('body.status', 'PROVISIONED');
-      expect(response).to.have.deep.property('body.profile.mpContactID', mpOnlyUser.mpContactId);
+      expect(response).to.have.nested.property('body.status', 'PROVISIONED');
+      expect(response).to.have.nested.property('body.profile.mpContactID', mpOnlyUser.mpContactId);
     });
 
     // Verify on email sent page

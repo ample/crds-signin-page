@@ -62,9 +62,9 @@ describe('Sign in scenarios: user is not authorized to sign in', () => {
       const expectedResponse = authenticationFailedResponse();
       cy.wait('@authRequest').then((response) => {
         expect(response).to.have.property('status', UNAUTHORIZED);
-        expect(response).to.have.deep.property('response.body.errorSummary', expectedResponse.errorSummary);
-        expect(response).to.have.deep.property('response.body.errorCode', expectedResponse.errorCode);
-        expect(response).to.have.deep.property('response.body.errorLink', expectedResponse.errorLink);
+        expect(response).to.have.nested.property('response.body.errorSummary', expectedResponse.errorSummary);
+        expect(response).to.have.nested.property('response.body.errorCode', expectedResponse.errorCode);
+        expect(response).to.have.nested.property('response.body.errorLink', expectedResponse.errorLink);
       });
 
       // Verify UI

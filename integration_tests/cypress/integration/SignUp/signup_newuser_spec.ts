@@ -68,8 +68,8 @@ describe('Sign Up scenario: New user can register for Crossroads account', () =>
     // Verify Okta user created, has pending email status and MP contact ID linked
     OktaAPI.getUser(newUser.username).then((response) => {
       expect(response).to.have.property('status', OK);
-      expect(response).to.have.deep.property('body.status', 'PROVISIONED');
-      expect(response).to.have.deep.property('body.profile.mpContactID').to.not.be.empty;
+      expect(response).to.have.nested.property('body.status', 'PROVISIONED');
+      expect(response).to.have.nested.property('body.profile.mpContactID').to.not.be.empty;
     });
 
     // Verify on email sent page

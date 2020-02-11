@@ -40,7 +40,7 @@ describe('Sign in scenarios: user is locked out', () => {
     // Verify response
     cy.wait('@authRequest').then((response) => {
       expect(response).to.have.property('status', OK);
-      expect(response).to.have.deep.property('response.body.status', 'LOCKED_OUT');
+      expect(response).to.have.nested.property('response.body.status', 'LOCKED_OUT');
     });
 
     // Verify on unlock page

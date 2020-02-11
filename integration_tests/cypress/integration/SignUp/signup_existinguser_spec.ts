@@ -40,8 +40,8 @@ describe('Sign Up scenario: User must sign up with unique email', () => {
     // Verify response
     cy.wait('@registerRequest').then((response) => {
       expect(response).to.have.property('status', BAD_REQUEST);
-      expect(response).to.have.deep.property('response.body.errorCauses[0]')
-        .and.equal(registrationFailureEmailExistsResponse().errorCauses[0]);
+      expect(response).to.have.nested.property('response.body.errorCauses[0]')
+        .and.contain(registrationFailureEmailExistsResponse().errorCauses[0]);
     });
 
     // Verify UI
