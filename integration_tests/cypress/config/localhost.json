@@ -3,6 +3,7 @@
   "testFiles": "**/*_*spec.*",
   "ignoreTestFiles": "**/*nolocal*spec.*",
   "video": false,
+  "defaultCommandTimeout": 10000,
   "env":{
     "signinExtension": "/",
     "homepage": "https://int.crossroads.net",
