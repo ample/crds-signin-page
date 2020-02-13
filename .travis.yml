@@ -19,7 +19,7 @@ install:
 # Integration Test stage
 integrationTests: &integrationTest
   if: env(RUN_CYPRESS) = true
-  script: "npx cypress run --record --key $cypressDashboard --browser chrome --config video=true --config-file ./cypress/config/int_crossroads.json"
+  script: "npx cypress run --record --key $cypressDashboard --config video=true --config-file ./cypress/config/int_crossroads.json"
 
 jobs:
   include:
