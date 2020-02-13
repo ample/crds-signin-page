@@ -29,7 +29,7 @@
 [context.production.environment]
   CONTENTFUL_ENV = "master"
 
-  OKTA_BASE_URL = "https://crossroads.okta.com"
+  OKTA_BASE_URL = "https://auth.crossroads.net"
   OKTA_REDIRECT_URI = "https://www.crossroads.net/oktasignin"
   # OKTA_FACEBOOK_CLIENT_ID = ""
   # OKTA_GOOGLE_CLIENT_ID = ""
