@@ -6,7 +6,7 @@ then
     exit 0
 fi
 
-body="{\"request\": { \"branch\":\"$HEAD\", \"config\": {\"env\": { \"RUN_CYPRESS\": \"$RUN_CYPRESS\", \"VAULT_SECRET_ID\": \"$VAULT_SECRET_ID\", \"VAULT_ROLE_ID\": \"$VAULT_ROLE_ID\", \"DEBUG_NetlifyContext\": \"$CONTEXT\"}}}}"
+body="{\"request\": { \"branch\":\"$HEAD\", \"config\": {\"env\": { \"RUN_CYPRESS\": \"$RUN_CYPRESS\", \"DEBUG_NetlifyContext\": \"$CONTEXT\"}}}}"
 
 curl -s -X POST \
 -H "Content-Type: application/json" \
