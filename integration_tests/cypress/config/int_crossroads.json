@@ -1,0 +1,12 @@
+{
+  "projectId": "g5abyp",
+  "baseUrl": "https://int.crossroads.net",
+  "testFiles": "**/*_*spec.*",
+  "video": false,
+  "defaultCommandTimeout": 10000,
+  "env":{
+    "signinExtension": "/oktasignin",
+    "homepage": "https://int.crossroads.net",
+    "vaultEnv": "int"
+  }
+}

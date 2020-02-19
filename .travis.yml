@@ -1,0 +1,38 @@
+language: node_js
+node_js:
+  - '10'
+dist: trusty #Needed to include Chrome
+addons:
+  chrome: stable
+  apt:
+    packages:
+      - libgconf-2-4
+cache:
+  npm: true
+  directories:
+    - ~/.cache
+before_install:
+  - cd integration_tests/
+install:
+    - npm ci
+
+# Integration Test stage
+integrationTests: &integrationTest
+  if: env(RUN_CYPRESS) = true
+  script: "npx cypress run --record --key $cypressDashboard --config video=true --config-file ./cypress/config/int_crossroads.json"
+
+jobs:
+  include:
+  # run tests in parallel by including several jobs with same "stage" name
+    - stage: Integration Tests
+      <<: *integrationTest
+
+notifications:
+  slack:
+    rooms:
+      - crdschurch:ibVw53mQCm35jYCNpMksSAxl
+    template:
+      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} by %{author} %{result} in %{elapsed_time}"
+    on_success: change
+    on_failure: always
+    on_pull_requests: false

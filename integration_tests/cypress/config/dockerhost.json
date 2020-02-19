@@ -1,0 +1,13 @@
+{
+  "projectId": "g5abyp",
+  "baseUrl": "http://localhost:8000",
+  "testFiles": "**/*_*spec.*",
+  "ignoreTestFiles": "**/*nolocal*spec.*",
+  "video": true,
+  "defaultCommandTimeout": 10000,
+  "env":{
+    "signinExtension": "/",
+    "homepage": "https://int.crossroads.net",
+    "vaultEnv": "int"
+  }
+}

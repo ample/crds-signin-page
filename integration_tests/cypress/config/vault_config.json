@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {
+      "secret": "Crossroads.SigninPage",
+      "keys": [
+        "OKTA_ENDPOINT",
+        "TEST_PASSWORD_SCISSORHANDS",
+        "TEST_PASSWORD_GOOSE",
+        "TEST_PASSWORD_BEE",
+        "TEST_PASSWORD_MCDONALD",
+        "TEST_PASSWORD_TEMP",
+        "OKTA_API_SUBDOMAIN",
+        "OKTA_API_TESTING_TOKEN"
+      ]
+    }
+  ]
+}

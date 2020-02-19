@@ -63,3 +63,8 @@ typings/
 .cache
 dist
 .env
+
+# Cypress files
+integration_tests/node_modules/
+integration_tests/cypress/screenshots/
+integration_tests/cypress/videos/
